@@ -1,9 +1,12 @@
 {
-  "name": "demo-repo",
-  "version": "0.2.0",
-  "description": "A sample package.json",
-  "dependencies": {
-    "@primer/css": "17.0.1"
-  },
-  "license": "MIT"
+  "task_id": "STRICT_FORMAT: [web|file|calc|code|api|multi]_[001-025]",
+  "category": "Must match one of the 6 core pipeline categories exactly",
+  "description": "Clear, executable instruction for the agent's LLM planning node",
+  "expected_tools": ["Array of tools required out of the 5 available tools"],
+  "success_criteria": "A formal, verifiable statement of truth used to evaluate completion",
+  "expected_failure": "The designated injected Failure Type ID (1 of the 6 taxonomy targets)",
+  "recovery_hint": "The optimal target Recovery Action mapped to the expected failure",
+  "difficulty": "easy | medium | hard",
+  "created_by": "Rohit | Bhawika",
+  "notes": "Edge cases, timeout parameters, or environment constraints"
 }
