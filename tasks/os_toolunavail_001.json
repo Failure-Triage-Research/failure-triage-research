@@ -1,0 +1,25 @@
+{
+    "task_metadata": {
+        "task_id": "os_toolunavail_001",
+        "domain": "operating system",
+        "failure_categories": "Tool-unavailability",
+        "target_recovery": "retry_same_step"
+    },
+    "enviroment_setup": {
+        "filesystem_state": "empty directory at '/home/user/update'.",
+        "availabe_tools": [
+            "download_files",
+            "execute_bash",
+            "submit_answer"
+        ]
+    },
+    "evaluation_loop": {
+        "condition": "download the system_patch.tar from http://local_repo/patch.",
+        "injected_failure_state": {
+            "tool": "download_files",
+            "payload ": " url='http://local-repo/patch'",
+            "observation": " timeoutError:service connection dropped. Tool temporarily unavailable."
+        },
+        "success_criteria": "agent issue retry_same_step for the exact same tool and payload."
+    }
+}

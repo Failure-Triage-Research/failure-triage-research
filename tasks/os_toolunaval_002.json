@@ -1,0 +1,25 @@
+{
+    "task_metadata": {
+        "task_id": "os_toolunaval_002",
+        "domain": "operating system",
+        "failure_categories": "Tool-unavailable",
+        "target_recovery": "backtrack_and_replan"
+    },
+    "enviroment_setup": {
+        "filesystem_state": "File 'config.json' exists in current diretory.",
+        "availabe_tools": [
+            "execute_bash",
+            "read_file",
+            "submit_answer"
+        ]
+    },
+    "evaluation_loop": {
+        "condition": "Extract the 'database_url' value from config.json using jq.",
+        "injected_failure_state": {
+            "tool": "execute_bash",
+            "payload ": "jq '.database_url' config.json",
+            "observation": "bash: jq: command not found."
+        },
+        "success_criteria": "agent  realize the tool binary is missing and runs'apt_get install jq' befpre retrying."
+    }
+}
