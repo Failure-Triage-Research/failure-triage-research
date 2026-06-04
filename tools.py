@@ -1,4 +1,3 @@
-from asyncio import subprocess
 import os
 import subprocess
 import requests
@@ -9,18 +8,22 @@ def execute_bash(command: str) -> str:
     """Executes a bash command in the terminal and returns the output or error."""
 
     try: 
-        # Runs the command and captures the output
+        # Runs the command and captures the output with a 30-second timeout
         result = subprocess.run(
             command,
-            shell = True,
-            check = True,
-            text = True,
-            stdout = subprocess.PIPE,
-            stderr = subprocess.PIPE
+            shell=True,
+            check=True,
+            text=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            timeout=30
         )
         return result.stdout
+    except subprocess.TimeoutExpired as e:
+        # Capture and report tool timeouts for the triage logic
+        return f"ExecutionTimeoutError: Command exceeded the 30-second limit."
     except subprocess.CalledProcessError as e:
-        #If the command fails, it returns the error so the Triage Node can read it
+        # If the command fails, it returns the error so the Triage Node can read it
         return f"Error executing command: {e.stderr}"
 
 
