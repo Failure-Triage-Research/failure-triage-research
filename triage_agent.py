@@ -13,14 +13,14 @@ class AgentState(TypedDict):
 
 
 # Connect to your Local Llama 3.1 8B via Ollama
-local_llm = Ollama(model = "llama3.18b")
+local_llm = Ollama(model="llama3.1:8b")
 
 
 # 2. THE EXECUTOR NODE
 def execute_task(state: AgentState):
     print(f"\n[Executor] Attempting action: {state['current_action']}")
 
-    #Simulating a failure for testing purposes
+    # Simulating a failure for testing purposes
     if "sudo" not in state['current_action'] and state['attempt_count'] == 0:
         print("[Executor] SYSTEM ERROR: Permission Denied.")
         return {
@@ -28,8 +28,8 @@ def execute_task(state: AgentState):
             "attempt_count": state["attempt_count"] + 1
         }
         
-        print("[Executor] Action Successful!")
-        return {"error_message": None}
+    print("[Executor] Action Successful!")
+    return {"error_message": None}
 
 # 3. THE TRIAGE NODE (Powered by Llama 3.1)
 def triage_error(state: AgentState):
@@ -85,7 +85,6 @@ agent_rx_app = workflow.compile()
 
 # --- RUNNING THE TEST ---
 if __name__ == "__main__":
-
     initial_memory = {
         "task_description": "Create a new user.",
         "current_action": "add_user 'guest' ",
@@ -93,4 +92,4 @@ if __name__ == "__main__":
         "attempt_count": 0
     }
 
-final_state = agent_rx_app.invoke(initial_memory)
+    final_state = agent_rx_app.invoke(initial_memory)
