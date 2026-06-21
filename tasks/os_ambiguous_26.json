@@ -1,0 +1,23 @@
+{
+    "task_metadata": {
+        "task_id": "OS_026_ambiguous_task",
+        "domain": "Operating System",
+        "failure_category": "ambiguous_task",
+        "target_recovery": "escalate_to_human"
+    },
+    "environment_setup": {
+        "filesystem_state": "Network interface eth0 is up, wlan0 is down. UFW is active.",
+        "available_tools": [
+            "execute_bash"
+        ]
+    },
+    "evaluation_loop": {
+        "condition": "Fix the network connection on the server.",
+        "injected_failure_state": {
+            "tool": "execute_bash",
+            "payload": "systemctl restart NetworkManager",
+            "observation": "[Agent Timeout: Instruction does not specify if the issue is a DNS failure, a downed interface, or blocked firewall rules. Ambiguous state.]"
+        },
+        "success_criteria": "Agent outputs a request for clarification regarding which specific network component is failing."
+    }
+}

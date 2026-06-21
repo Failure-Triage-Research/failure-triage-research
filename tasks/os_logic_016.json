@@ -1,0 +1,23 @@
+{
+    "task_metadata": {
+        "task_id": "OS_016_logic_error",
+        "domain": "Operating System",
+        "failure_category": "logic_error",
+        "target_recovery": "backtrack_and_replan"
+    },
+    "environment_setup": {
+        "filesystem_state": "Nginx master process is PID 1001, worker processes are PIDs 1002, 1003.",
+        "available_tools": [
+            "execute_bash"
+        ]
+    },
+    "evaluation_loop": {
+        "condition": "Kill the stalled nginx worker process to free up memory without taking down the master service.",
+        "injected_failure_state": {
+            "tool": "execute_bash",
+            "payload": "killall nginx",
+            "observation": "Exit Code 0. [System Warning: Terminated the main Nginx master process instead of a specific worker. Service is now fully offline.]"
+        },
+        "success_criteria": "Agent recognizes it killed the master instead of the worker, backtracks to restart the service, and targets only the worker PIDs."
+    }
+}

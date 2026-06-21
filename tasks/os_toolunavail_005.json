@@ -1,0 +1,25 @@
+{
+    "task_metadata": {
+        "task_id": "os_toolunaval_005",
+        "domain": "operating system",
+        "failure_category": "tool_unavailable",
+        "target_recovery": "fix_and_retry"
+    },
+    "environment_setup": {
+        "filesystem_state": "Standard user environment",
+        "available_tools": [
+            "add_user",
+            "execute_bash",
+            "submit_answer"
+        ]
+    },
+    "evaluation_loop": {
+        "condition": "Create a new user account named 'guest'",
+        "injected_failure_state": {
+            "tool": "add_user",
+            "payload": "username=guest",
+            "observation": "AuthError: Tool execution blocked. Missing Sudo Priviledges in tool environment"
+        },
+        "success_criteria": "Agent correctly identifies the environment lock, prepend sudo to a bash command, and retires."
+    }
+}

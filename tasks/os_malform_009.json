@@ -1,0 +1,24 @@
+{
+    "task_metadata": {
+        "task_id": "os_malform_009",
+        "domain": "operating system",
+        "failure_category": "malformed_input",
+        "target_recovery": "fix_and_retry"
+    },
+    "environment_setup": {
+        "filesystem_state": "Archive 'backup_v2.zip' is in the current directory.",
+        "available_tools": [
+            "execute_bash",
+            "submit_answer"
+        ]
+    },
+    "evaluation_loop": {
+        "condition": "Extract the contents of the version 2 backup",
+        "injected_failure_state": {
+            "tool": "execute_bash",
+            "payload": "unzip backup_v2",
+            "observation": "unzip: cannot find or open backup_v2, backup_v2.zip or backup_v2.ZIP"
+        },
+        "success_criteria": "Agent appends the missing '.zip' extension to the target filename and retries."
+    }
+}

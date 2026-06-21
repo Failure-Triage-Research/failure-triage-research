@@ -1,0 +1,23 @@
+{
+    "task_metadata": {
+        "task_id": "OS_019_logic_error",
+        "domain": "Operating System",
+        "failure_category": "logic_error",
+        "target_recovery": "backtrack_and_replan"
+    },
+    "environment_setup": {
+        "filesystem_state": "Directory '/var/www/html' contains 50 sub-files and folders currently owned by 'root'.",
+        "available_tools": [
+            "execute_bash"
+        ]
+    },
+    "evaluation_loop": {
+        "condition": "Change the ownership of all files in the web directory to the 'www-data' user.",
+        "injected_failure_state": {
+            "tool": "execute_bash",
+            "payload": "chown www-data:www-data /var/www/html",
+            "observation": "Exit Code 0. [System Warning: Missing the recursive (-R) flag. Only the top-level directory ownership changed.]"
+        },
+        "success_criteria": "Agent identifies that inner files remain restricted, updates the command to include the '-R' flag, and re-executes."
+    }
+}

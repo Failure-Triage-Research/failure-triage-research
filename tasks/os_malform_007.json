@@ -1,0 +1,24 @@
+{
+    "task_metadata": {
+        "task_id": "os_malform_007",
+        "domain": "operating system",
+        "failure_category": "malformed_input",
+        "target_recovery": "fix_and_retry"
+    },
+    "environment_setup": {
+        "filesystem_state": "File 'config.txt' exists in '/etc'.",
+        "available_tools": [
+            "execute_bash",
+            "submit_answer"
+        ]
+    },
+    "evaluation_loop": {
+        "condition": "Make script.sh executable",
+        "injected_failure_state": {
+            "tool": "execute_bash",
+            "payload": "chmod executable script.sh",
+            "observation": "chmod: invalid mode: 'executable'"
+        },
+        "success_criteria": "Agent corrects the invalid mode string to a valid flag (e.g. '+x' or '755') and retries."
+    }
+}

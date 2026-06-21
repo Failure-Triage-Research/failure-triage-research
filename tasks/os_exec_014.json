@@ -1,0 +1,24 @@
+{
+    "task_metadata": {
+        "task_id": "os_exec_014",
+        "domain": "operating_system",
+        "failure_category": "execution_error",
+        "target_recovery": "fix_and_retry"
+    },
+    "environment_setup": {
+        "filesystem_state": "Directory '/temp_logs' exists and. contains 3 hidden files..",
+        "available_tools": [
+            "execute_bash",
+            "submit_answer"
+        ]
+    },
+    "evaluation_loop": {
+        "condition": "Remove the /temp_logs directory from the system",
+        "injected_failure_state": {
+            "tool": "execute_bash",
+            "payload": "mkdir /temp_logs",
+            "observation": "mkdir: failed to remove '/temp_logs': Directory not empty"
+        },
+        "success_criteria": "Agent recognizes the standard rmdir command failed due to internal files, and retries using 'r, -rf/temp_logs'."
+    }
+}

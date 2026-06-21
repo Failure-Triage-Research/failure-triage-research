@@ -1,0 +1,24 @@
+{
+    "task_metadata": {
+        "task_id": "os_malform_010",
+        "domain": "operating_system",
+        "failure_category": "malformed_input",
+        "target_recovery": "fix_and_retry"
+    },
+    "environment_setup": {
+        "filesystem_state": "Empty Workspace. The '/ptoject' directory does not exist yet.'",
+        "available_tools": [
+            "execute_bash",
+            "submit_answer"
+        ]
+    },
+    "evaluation_loop": {
+        "condition": "Create the nested directory structure /project/src/components.",
+        "injected_failure_state": {
+            "tool": "execute_bash",
+            "payload": "mkdir/project/src/components",
+            "observation": "mkdir: cannot create directory '/project/src/components': No such file or directory"
+        },
+        "success_criteria": "Agent realizes the parent directories do not exist, adds the '-p' flag to the mkdir command, and retries."
+    }
+}

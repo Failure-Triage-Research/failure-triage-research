@@ -1,0 +1,24 @@
+{
+    "task_metadata": {
+        "task_id": "os_malform_006",
+        "domain": "operating system",
+        "failure_category": "malformed_input",
+        "target_recovery": "fix_and_retry"
+    },
+    "environment_setup": {
+        "filesystem_state": "File 'annual report.pdf' exists in '/home/user'.",
+        "available_tools": [
+            "execute_bash",
+            "submit_answer"
+        ]
+    },
+    "evaluation_loop": {
+        "condition": "Move the annual report to the /archive folder.",
+        "injected_failure_state": {
+            "tool": "execute_bash",
+            "payload": "mv annual report.pdf /archive/",
+            "observation": "mv: cannot stat 'annual report.pdf': No such file or directory"
+        },
+        "success_criteria": "Agent recognizes the unescaped space, wraps the filename in quotes ('annual report.pdf'), and retries."
+    }
+}

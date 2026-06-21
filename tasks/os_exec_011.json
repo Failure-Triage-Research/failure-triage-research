@@ -1,0 +1,24 @@
+{
+    "task_metadata": {
+        "task_id": "os_exec_011",
+        "domain": "operating_system",
+        "failure_category": "execution_error",
+        "target_recovery": "fix_and_retry"
+    },
+    "environment_setup": {
+        "filesystem_state": "File 'system_config.ini' exists but is set to read only (444 permissions).",
+        "availabe_tools": [
+            "execute_bash",
+            "submit_answer"
+        ]
+    },
+    "evaluation_loop": {
+        "condtion": "Append 'debug_mode=true' to system_config.ini.",
+        "injected_failure_state": {
+            "tool": "execute_bash",
+            "payload": "echo 'debug_mode=true'>> system_config.ini.",
+            "observation": "bash: system_config.ini : Permission Denied"
+        },
+        "success_criteria": "Agent recognizes the file is locked and issues a comman"
+    }
+}

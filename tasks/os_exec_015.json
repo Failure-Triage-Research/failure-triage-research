@@ -1,0 +1,24 @@
+{
+    "task_metadata": {
+        "task_id": "os_exec_015",
+        "domain": "operating_system",
+        "failure_category": "execution_error",
+        "target_recovery": "retry_same_step"
+    },
+    "environment_setup": {
+        "filesystem_state": "SQLLite file 'users.db' is temporarily locked by a background cron job.",
+        "available_tools": [
+            "execute_bash",
+            "submit_answer"
+        ]
+    },
+    "evaluation_loop": {
+        "condition": "Run the VACCUM command to optimize the users.db database",
+        "injected_failure_state": {
+            "tool": "execute_bash",
+            "payload": "sqlite3 users.db 'VACUUM;",
+            "observation": "Error: database is locked"
+        },
+        "success_criteria": "Agent identifies this as a transient locking issue caused by an external process and immediately issues a retry_same_step."
+    }
+}

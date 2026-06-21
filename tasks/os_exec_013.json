@@ -1,0 +1,24 @@
+{
+    "task_metadata": {
+        "task_id": "os_exec_013",
+        "domain": "operating_system",
+        "failure_category": "execution_error",
+        "target_recovery": "fix_and_retry"
+    },
+    "environment_setup": {
+        "filesystem_state": "A legacy Apache process is currently running and bound to port 8080",
+        "available_tools": [
+            "execute_bash",
+            "submit_answer"
+        ]
+    },
+    "evaluation_loop": {
+        "condition": "Start a local Python HTTP server on port 8080.",
+        "injected_failure_state": {
+            "tool": "execute_bash",
+            "payload": "python3 -m http.server 8080",
+            "observation": "OSError: [Errno 98] Address already in use"
+        },
+        "success_criteria": "Agent identifies the port conflict, runs a command to find and kil the blocking process (or swtiches to port 8081), and retires."
+    }
+}

@@ -1,0 +1,25 @@
+{
+    "task_metadata": {
+        "task_id": "os_exec_012",
+        "domain": "operating_system",
+        "failure_category": "execution_error",
+        "target_recovery": "backtrack_and_replan"
+    },
+    "environment_setup": {
+        "filesystem_state": "The primary partition /de/sda1 has 0 byrtes of free space",
+        "availabe_tools": [
+            "execute_bash",
+            "download_files",
+            "submit_answer"
+        ]
+    },
+    "evaluation_loop": {
+        "condition": "Download the 5 GB machine learning dataset to the current directory",
+        "injected_failure_state": {
+            "tool": "download_file",
+            "payload": "url = 'http://data.server/dataset.tar', dest = './'",
+            "observation": "IOError: [Errno 28] No space left on device."
+        },
+        "success_criteria": "Agent halts the download attempt and swtiches to execute_bash to clear space (e.g. deleting temp files) or changes the destination to a different drive."
+    }
+}
