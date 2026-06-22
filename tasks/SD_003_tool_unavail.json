@@ -1,0 +1,8 @@
+{
+  "task_id" : "SD_003_tool_unavail",
+  "domain" : "Software Dev",
+  "failure_type" : "tool_unavailable",
+  "task_description" : "Install all Python dependencies listed in the requirements.txt file to set up the virtual environment.",
+  "current_action" : "pip install -r requirements.txt",
+  "error_message" : "WARNING: Retrying (Retry(total = 4, connect = None, read = None, redirect = None, status = None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f8b9c....>: Failed to establish a new connection: [Errno -3] Temporary failure in name resolution')'."
+}
