@@ -1,0 +1,8 @@
+{
+    "task_id": "os_ambigiuous_30",
+    "error_category": "ambigiuous",
+    "task_description": "Move the dataset to the archive folder",
+    "current_action": "mv dataset.csv /archive/",
+    "error_message": "mv: cannot move 'dataset.csv' to '/archive/': No such file or directory",
+    "attempt_count": 0
+}

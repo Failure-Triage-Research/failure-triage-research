@@ -1,0 +1,8 @@
+{
+    "task_id": "os_ambigiuous_28",
+    "error_category": "ambigiuous",
+    "task_description": "Run the python data processing script on the new dataset.",
+    "current_action": "python3 process_data.py",
+    "error_message": "TypeError:process_data() missing 2 required positional arguments: '--input_dir' and '--ouput_dir'",
+    "attempt_count": 0
+}

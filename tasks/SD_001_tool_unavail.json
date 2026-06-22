@@ -1,0 +1,8 @@
+{
+    "task_id": "SD_001_tool_unavail",
+    "domain": "Software Dev",
+    "failure_type": "tool_unavailable",
+    "task_description": "Clone the backend microservice repository 'auth-service' from the corporate GitLab server into the current workspace",
+    "current_action": "git clone https://gitlab.internal.corp/backend/auth_service.git",
+    "error_message": "fatal: unable to access 'https://gitlab.internal.corp/backend/auth_service.git/': Could not resolve host: gitlab.internal.corp (DNS lookup failed)."
+}
