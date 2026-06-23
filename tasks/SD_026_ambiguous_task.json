@@ -1,0 +1,21 @@
+{
+  "task_metadata": {
+    "task_id": "SD_026_ambiguous_task",
+    "domain": "Software Dev",
+    "failure_category": "ambiguous_task",
+    "target_recovery": "escalate_to_human"
+  },
+  "environment_setup": {
+    "filesystem_state": "Node project contains multiple build scripts ('build:dev', 'build:prod', 'build:staging').",
+    "available_tools": ["execute_bash"]
+  },
+  "evaluation_loop": {
+    "condition": "Fix the bug in the authentication logic and run the build script.",
+    "injected_failure_state": {
+      "tool": "execute_bash",
+      "payload": "npm run build",
+      "observation": "npm ERR! missing script: build\n[Agent Timeout: The instruction did not specify which file contains the bug, nor which specific build tool environment to use.]"
+    },
+    "success_criteria": "Agent recognizes the missing parameters (file location, specific script target) and halts execution to ask the human for clarification."
+  }
+}

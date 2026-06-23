@@ -1,0 +1,8 @@
+{
+    "task_id" : "SD_013_execution_error",
+    "domain" : "Software Dev",
+    "failure_type" : "executiuon_error",
+    "task_description" : "Compile the Go microservice into an executable binary named 'server'",
+    "currrent_action" : "go build -o server main.go",
+    "error_message" : "main.go:5:2: no required module provides package github.com/gorilla/mux; to add it: \n\tgo get github.com/gorilla/mux"
+}

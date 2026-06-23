@@ -1,0 +1,8 @@
+{
+    "task_id" : "SD_009_malformed_input",
+    "domain" : "Software Dev",
+    "failure_type" : "malformed_input",
+    "task_description" : "Build the Dockerfile in the current directory and tag the resulting image as 'backend-api:v2'.",
+    "current_action" : "docker build -tag backend-api:v2.",
+    "error_message" : "unknown shothand flag: 'a' in -tag\nSee 'docker build --help'."
+}

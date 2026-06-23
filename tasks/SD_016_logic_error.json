@@ -1,0 +1,8 @@
+{
+    "task_id" : "SD_016_logic_error",
+    "domain" : "Software Dev",
+    "failure_type" : "logic_error",
+    "task_description" : "Undo the last faulty commit on the 'dev' branch so the code can be reviewed before merging.",
+    "current_action" : "git reset --hard HEAD~1",
+    "error_message" : "HEAD is now at 8f4a2b1 Update README.md. [System Warning: Action executed successfully on branch 'main'. Task context explicitly required modifications to the 'dev' branch. Logical mismatch detected.]"
+}

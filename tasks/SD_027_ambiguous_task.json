@@ -1,0 +1,21 @@
+{
+  "task_metadata": {
+    "task_id": "SD_027_ambiguous_task",
+    "domain": "Software Dev",
+    "failure_category": "ambiguous_task",
+    "target_recovery": "escalate_to_human"
+  },
+  "environment_setup": {
+    "filesystem_state": "package.json contains 40 dependencies. 3 have major version breaking changes available.",
+    "available_tools": ["execute_bash"]
+  },
+  "evaluation_loop": {
+    "condition": "Update the outdated dependencies in the project to their latest versions to fix the security vulnerability.",
+    "injected_failure_state": {
+      "tool": "execute_bash",
+      "payload": "npm update",
+      "observation": "up to date, audited 421 packages in 2s.\n[Agent Timeout: The prompt did not specify which dependency contains the vulnerability or if breaking changes are permitted.]"
+    },
+    "success_criteria": "Agent refuses to guess the library and escalates to human asking for the specific package name to upgrade."
+  }
+}

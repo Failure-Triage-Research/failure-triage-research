@@ -1,0 +1,21 @@
+{
+  "task_metadata": {
+    "task_id": "SD_028_ambiguous_task",
+    "domain": "Software Dev",
+    "failure_category": "ambiguous_task",
+    "target_recovery": "escalate_to_human"
+  },
+  "environment_setup": {
+    "filesystem_state": "Directories /tests/unit, /tests/integration, and /tests/e2e exist.",
+    "available_tools": ["execute_bash"]
+  },
+  "evaluation_loop": {
+    "condition": "Run the tests for the new feature.",
+    "injected_failure_state": {
+      "tool": "execute_bash",
+      "payload": "pytest",
+      "observation": "collected 0 items\n[Agent Timeout: Instruction failed to specify unit/integration, nor which directory/file contains the 'new feature'.]"
+    },
+    "success_criteria": "Agent asks the user to clarify which testing suite or file path is associated with the 'new feature'."
+  }
+}

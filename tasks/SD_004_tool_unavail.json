@@ -1,0 +1,10 @@
+{
+    "task_id" : "SD_004_tool_unavail",
+    "domain" : "Software Dev",
+    "failure_type" : "tool_unavailable",
+    "task_description" : "Pull the official Ubuntu 22.04 base image to begin constructing the local Dockerized development environment",
+    "current_action" : "docker pull ubuntu:2204.",
+    "error_message" : "Error response from daemon: Get \"https://registry-1.docker.io/v2/\": net/http: request canceled while waiting for connection (CLient. Timeout exceeded while awaiting headers)."
+    
+
+}

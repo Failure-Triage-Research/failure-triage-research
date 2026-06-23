@@ -1,0 +1,8 @@
+{
+    "task_id" : "SD_018_logic_error",
+    "domain" : "Software Dev",
+    "failure_type" : "logic_error",
+    "task_description" : "Install the 'pytest-cov' library exclusively into the 'test-env' virtual environment.",
+    "current_action" : "pip install pytest-cov",
+    "error_message" : "Requirement already satisfied: pytest-cov in /usr/local/lib/python3.10/dist-packages\n[System Warning: Package successfully installed to global site-packages. Target virtual environment 'test-env' was not activated prior to execution.]"
+}

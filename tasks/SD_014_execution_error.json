@@ -1,0 +1,8 @@
+{
+    "task_id" : "SD_014_execution_error",
+    "domain" : "Software Dev",
+    "failure_type" : "execution_error",
+    "task_description" : "Clean and compile the Spring Boot application using Maven",
+    "current_action" : "mvn clean compile",
+    "error_message" : "[ERROR] COMPILATION ERROR : \n[ERROR]/workspace/src/main/java/com/app/RecordConfig.java:[14,27] records are not supported in -source 11\n (use -source 16 or highher t0 enable records)"
+}

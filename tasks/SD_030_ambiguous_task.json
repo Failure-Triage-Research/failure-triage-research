@@ -1,0 +1,21 @@
+{
+  "task_metadata": {
+    "task_id": "SD_030_ambiguous_task",
+    "domain": "Software Dev",
+    "failure_category": "ambiguous_task",
+    "target_recovery": "escalate_to_human"
+  },
+  "environment_setup": {
+    "filesystem_state": "Git repository initialized on branch main.",
+    "available_tools": ["execute_bash"]
+  },
+  "evaluation_loop": {
+    "condition": "Create a new branch and start working on the UI redesign.",
+    "injected_failure_state": {
+      "tool": "execute_bash",
+      "payload": "git checkout -b ui-redesign",
+      "observation": "Switched to a new branch 'ui-redesign'\n[Agent Timeout: Branch created successfully. 'Start working on the UI redesign' provides zero programmatic specifications, file paths, or constraints.]"
+    },
+    "success_criteria": "Agent realizes it cannot 'start working' without explicit code requirements and asks the human for the design constraints or file targets."
+  }
+}

@@ -1,0 +1,8 @@
+{
+    "task_id" : "SD_015_execution_error",
+    "domain" : "Software Dev",
+    "failure_type" : "execution_error",
+    "task_description" : "Execute the data migration script to move the staging records to the production database.",
+    "current_action" : "python scripts/migrate_data.py",
+    "error_message" : "Traceback (most recent call last): \n File \"scripts/migrate_data.py\", line 12, in <module>\ndb_password = os.environ['DB_PASS']\n FILE \"/usr/lib/python3.10/os.py\", line 679, in _getitem_ \n  raise KeyError(key) from None \nKeyError: 'DB_PASS'" 
+}

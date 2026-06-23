@@ -1,0 +1,8 @@
+{
+    "task_id" : "SD_019_logic_error",
+    "domain" : "Software Dev",
+    "failure_type" : "logic_error",
+    "task_description" : "Run the Redis docker container in the background and expose it to the standard host 6379.",
+    "current_action" : "docker run -p 8080:6379 -d redis",
+    "error_message" : "d41d8cd98f00b204e9800998ecf8427e51411180.. \n[System Warning : Container deployed successfully. However, container deployed successfully. However, container port 6379 is bound to host port 8080. Task instructions explicitly required binding to host port 6379.]"
+}

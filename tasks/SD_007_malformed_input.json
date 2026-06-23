@@ -1,0 +1,8 @@
+{
+    "task_id" : "SD_007_malformed_input",
+    "domain" : "Software Dev",
+    "failure_type" : "malformed_input",
+    "task_description" : "Initialize a new React frontend boilerplate project named 'admin_dashboard_ui' in the current directory",
+    "current_action" : "npx create-react-app admin_dashboard_ui",
+    "error_message" : "npm ERR! Cannot create a project named \"admin_dashboard_ui\" because of npm naming restricitons: \nnpm ERR! * name can no longer contain underscores"
+}
