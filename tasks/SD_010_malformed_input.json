@@ -1,8 +1,23 @@
 {
-    "task_id" : "SD_010_malformed_input",
-    "domain" : "Software Dev",
-    "failure_type" : "malformed_input",
-    "task_description" : "Run the data ingestion script and set the batch size limit to five hundred.",
-    "current_action" : "python ingest_pipeline.py -- batch-size\five-hundred\"",
-    "error_message" : "usage: injest_pipeline.py [-h] [--batch-sizeBATCH_SIZE]\ninjest_pipeline.py: errror: argument --batch-size: invalid int value: 'five-hundred'"
+  "task_metadata": {
+    "task_id": "SD_010_malformed_input",
+    "domain": "Software Dev",
+    "failure_category": "malformed_input",
+    "target_recovery": "fix_and_retry"
+  },
+  "environment_setup": {
+    "filesystem_state": "Standard environment setup. (Requires manual review)",
+    "available_tools": [
+      "execute_bash"
+    ]
+  },
+  "evaluation_loop": {
+    "condition": "Run the data ingestion script and set the batch size limit to five hundred.",
+    "injected_failure_state": {
+      "tool": "execute_bash",
+      "payload": "python ingest_pipeline.py -- batch-size\five-hundred\"",
+      "observation": "usage: injest_pipeline.py [-h] [--batch-sizeBATCH_SIZE]\ninjest_pipeline.py: errror: argument --batch-size: invalid int value: 'five-hundred'"
+    },
+    "success_criteria": "Agent correctly resolves the failure. (Requires manual review)"
+  }
 }

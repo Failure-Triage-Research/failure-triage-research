@@ -1,8 +1,23 @@
 {
-    "task_id" : "SD_012_execution_error",
-    "domain" : "Software Dev",
-    "failure_type" : "execution_error",
-    "task_description" : "Compile the React frontend application into optimized static assets for production deployment.",
-    "current_action" : "npm run build",
-    "error_message" : "FATAL ERROR: Reached heap limit Allocation failed - JavaScript heap out of memory\n 1: 0xb09c10 node::Abort() [node]"
+  "task_metadata": {
+    "task_id": "SD_012_execution_error",
+    "domain": "Software Dev",
+    "failure_category": "execution_error",
+    "target_recovery": "fix_and_retry"
+  },
+  "environment_setup": {
+    "filesystem_state": "Standard environment setup. (Requires manual review)",
+    "available_tools": [
+      "execute_bash"
+    ]
+  },
+  "evaluation_loop": {
+    "condition": "Compile the React frontend application into optimized static assets for production deployment.",
+    "injected_failure_state": {
+      "tool": "execute_bash",
+      "payload": "npm run build",
+      "observation": "FATAL ERROR: Reached heap limit Allocation failed - JavaScript heap out of memory\n 1: 0xb09c10 node::Abort() [node]"
+    },
+    "success_criteria": "Agent correctly resolves the failure. (Requires manual review)"
+  }
 }

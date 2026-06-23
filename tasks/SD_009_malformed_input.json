@@ -1,8 +1,23 @@
 {
-    "task_id" : "SD_009_malformed_input",
-    "domain" : "Software Dev",
-    "failure_type" : "malformed_input",
-    "task_description" : "Build the Dockerfile in the current directory and tag the resulting image as 'backend-api:v2'.",
-    "current_action" : "docker build -tag backend-api:v2.",
-    "error_message" : "unknown shothand flag: 'a' in -tag\nSee 'docker build --help'."
+  "task_metadata": {
+    "task_id": "SD_009_malformed_input",
+    "domain": "Software Dev",
+    "failure_category": "malformed_input",
+    "target_recovery": "fix_and_retry"
+  },
+  "environment_setup": {
+    "filesystem_state": "Standard environment setup. (Requires manual review)",
+    "available_tools": [
+      "execute_bash"
+    ]
+  },
+  "evaluation_loop": {
+    "condition": "Build the Dockerfile in the current directory and tag the resulting image as 'backend-api:v2'.",
+    "injected_failure_state": {
+      "tool": "execute_bash",
+      "payload": "docker build -tag backend-api:v2.",
+      "observation": "unknown shothand flag: 'a' in -tag\nSee 'docker build --help'."
+    },
+    "success_criteria": "Agent correctly resolves the failure. (Requires manual review)"
+  }
 }

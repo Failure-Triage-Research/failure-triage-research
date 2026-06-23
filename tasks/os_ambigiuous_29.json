@@ -1,8 +1,23 @@
 {
+  "task_metadata": {
     "task_id": "os_ambigiuous_29",
-    "error_category": "ambigiuous",
-    "task_description": "Commit the staged API changes to the repository",
-    "current_action": "git commit",
-    "error_message": "Aborting commit due to empty commit message",
-    "attempt_count": 0
+    "domain": "Unknown",
+    "failure_category": "Unknown",
+    "target_recovery": "fix_and_retry"
+  },
+  "environment_setup": {
+    "filesystem_state": "Standard environment setup. (Requires manual review)",
+    "available_tools": [
+      "execute_bash"
+    ]
+  },
+  "evaluation_loop": {
+    "condition": "Commit the staged API changes to the repository",
+    "injected_failure_state": {
+      "tool": "execute_bash",
+      "payload": "git commit",
+      "observation": "Aborting commit due to empty commit message"
+    },
+    "success_criteria": "Agent correctly resolves the failure. (Requires manual review)"
+  }
 }

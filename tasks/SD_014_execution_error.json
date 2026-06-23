@@ -1,8 +1,23 @@
 {
-    "task_id" : "SD_014_execution_error",
-    "domain" : "Software Dev",
-    "failure_type" : "execution_error",
-    "task_description" : "Clean and compile the Spring Boot application using Maven",
-    "current_action" : "mvn clean compile",
-    "error_message" : "[ERROR] COMPILATION ERROR : \n[ERROR]/workspace/src/main/java/com/app/RecordConfig.java:[14,27] records are not supported in -source 11\n (use -source 16 or highher t0 enable records)"
+  "task_metadata": {
+    "task_id": "SD_014_execution_error",
+    "domain": "Software Dev",
+    "failure_category": "execution_error",
+    "target_recovery": "fix_and_retry"
+  },
+  "environment_setup": {
+    "filesystem_state": "Standard environment setup. (Requires manual review)",
+    "available_tools": [
+      "execute_bash"
+    ]
+  },
+  "evaluation_loop": {
+    "condition": "Clean and compile the Spring Boot application using Maven",
+    "injected_failure_state": {
+      "tool": "execute_bash",
+      "payload": "mvn clean compile",
+      "observation": "[ERROR] COMPILATION ERROR : \n[ERROR]/workspace/src/main/java/com/app/RecordConfig.java:[14,27] records are not supported in -source 11\n (use -source 16 or highher t0 enable records)"
+    },
+    "success_criteria": "Agent correctly resolves the failure. (Requires manual review)"
+  }
 }

@@ -13,12 +13,12 @@
         ]
     },
     "evaluation_loop": {
-        "condtion": "Create a new developer user with UID 1005.",
+        "condition": "Create a new developer user with UID 1005.",
         "injected_failure_state": {
             "tool": "create_user",
             "payload": "username='dev_user', uid = '1005'",
             "observation": "TypeError: 'uid' parameter requires an integer, received string."
         },
-        "success_criteria": "Agent removes the quotation marks around the UID to pass it as an integer and retires."
+        "success_criteria": "Agent removes the quotation marks around the UID to pass it as an integer and retries."
     }
 }

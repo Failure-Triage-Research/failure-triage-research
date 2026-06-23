@@ -1,0 +1,23 @@
+{
+    "task_metadata": {
+        "task_id": "os_toolunavail_003",
+        "domain": "operating system",
+        "failure_category": "tool_unavailable",
+        "target_recovery": "retry_same_step"
+    },
+    "environment_setup": {
+        "filesystem_state": "Network connection is unstable.",
+        "available_tools": [
+            "execute_bash"
+        ]
+    },
+    "evaluation_loop": {
+        "condition": "Update the local package manager lists.",
+        "injected_failure_state": {
+            "tool": "execute_bash",
+            "payload": "apt-get update",
+            "observation": "Err:1 http://archive.ubuntu.com/ubuntu jammy InRelease\n  Could not connect to archive.ubuntu.com:80 (101: Network is unreachable)"
+        },
+        "success_criteria": "Agent recognizes the transient network issue and schedules a retry after 2 seconds."
+    }
+}

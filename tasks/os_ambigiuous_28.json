@@ -1,8 +1,23 @@
 {
+  "task_metadata": {
     "task_id": "os_ambigiuous_28",
-    "error_category": "ambigiuous",
-    "task_description": "Run the python data processing script on the new dataset.",
-    "current_action": "python3 process_data.py",
-    "error_message": "TypeError:process_data() missing 2 required positional arguments: '--input_dir' and '--ouput_dir'",
-    "attempt_count": 0
+    "domain": "Unknown",
+    "failure_category": "Unknown",
+    "target_recovery": "fix_and_retry"
+  },
+  "environment_setup": {
+    "filesystem_state": "Standard environment setup. (Requires manual review)",
+    "available_tools": [
+      "execute_bash"
+    ]
+  },
+  "evaluation_loop": {
+    "condition": "Run the python data processing script on the new dataset.",
+    "injected_failure_state": {
+      "tool": "execute_bash",
+      "payload": "python3 process_data.py",
+      "observation": "TypeError:process_data() missing 2 required positional arguments: '--input_dir' and '--ouput_dir'"
+    },
+    "success_criteria": "Agent correctly resolves the failure. (Requires manual review)"
+  }
 }

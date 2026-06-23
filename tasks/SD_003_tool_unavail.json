@@ -1,8 +1,23 @@
 {
-  "task_id" : "SD_003_tool_unavail",
-  "domain" : "Software Dev",
-  "failure_type" : "tool_unavailable",
-  "task_description" : "Install all Python dependencies listed in the requirements.txt file to set up the virtual environment.",
-  "current_action" : "pip install -r requirements.txt",
-  "error_message" : "WARNING: Retrying (Retry(total = 4, connect = None, read = None, redirect = None, status = None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f8b9c....>: Failed to establish a new connection: [Errno -3] Temporary failure in name resolution')'."
+  "task_metadata": {
+    "task_id": "SD_003_tool_unavail",
+    "domain": "Software Dev",
+    "failure_category": "tool_unavailable",
+    "target_recovery": "fix_and_retry"
+  },
+  "environment_setup": {
+    "filesystem_state": "Standard environment setup. (Requires manual review)",
+    "available_tools": [
+      "execute_bash"
+    ]
+  },
+  "evaluation_loop": {
+    "condition": "Install all Python dependencies listed in the requirements.txt file to set up the virtual environment.",
+    "injected_failure_state": {
+      "tool": "execute_bash",
+      "payload": "pip install -r requirements.txt",
+      "observation": "WARNING: Retrying (Retry(total = 4, connect = None, read = None, redirect = None, status = None)) after connection broken by 'NewConnectionError('<pip._vendor.urllib3.connection.HTTPSConnection object at 0x7f8b9c....>: Failed to establish a new connection: [Errno -3] Temporary failure in name resolution')'."
+    },
+    "success_criteria": "Agent correctly resolves the failure. (Requires manual review)"
+  }
 }

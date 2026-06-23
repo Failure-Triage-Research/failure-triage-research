@@ -1,8 +1,23 @@
 {
+  "task_metadata": {
     "task_id": "os_ambigiuous_30",
-    "error_category": "ambigiuous",
-    "task_description": "Move the dataset to the archive folder",
-    "current_action": "mv dataset.csv /archive/",
-    "error_message": "mv: cannot move 'dataset.csv' to '/archive/': No such file or directory",
-    "attempt_count": 0
+    "domain": "Unknown",
+    "failure_category": "Unknown",
+    "target_recovery": "fix_and_retry"
+  },
+  "environment_setup": {
+    "filesystem_state": "Standard environment setup. (Requires manual review)",
+    "available_tools": [
+      "execute_bash"
+    ]
+  },
+  "evaluation_loop": {
+    "condition": "Move the dataset to the archive folder",
+    "injected_failure_state": {
+      "tool": "execute_bash",
+      "payload": "mv dataset.csv /archive/",
+      "observation": "mv: cannot move 'dataset.csv' to '/archive/': No such file or directory"
+    },
+    "success_criteria": "Agent correctly resolves the failure. (Requires manual review)"
+  }
 }

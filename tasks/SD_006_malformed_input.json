@@ -1,8 +1,23 @@
 {
-    "task_id" : "SD_006_malformed_input",
-    "domain" : "Software Dev",
-    "failure_type" : "malformed_input",
-    "task_description" : "Commit the staged changes with the message indicating the user authentication schema was updated.",
-    "current_action" : "git commit -m Update user authentication schema",
-    "errror_message" : "error: pathspec 'user' did not match any file(s) known to git.\nerrror: pathspec 'authentication' did not match any file(s) known to git."
+  "task_metadata": {
+    "task_id": "SD_006_malformed_input",
+    "domain": "Software Dev",
+    "failure_category": "malformed_input",
+    "target_recovery": "fix_and_retry"
+  },
+  "environment_setup": {
+    "filesystem_state": "Standard environment setup. (Requires manual review)",
+    "available_tools": [
+      "execute_bash"
+    ]
+  },
+  "evaluation_loop": {
+    "condition": "Commit the staged changes with the message indicating the user authentication schema was updated.",
+    "injected_failure_state": {
+      "tool": "execute_bash",
+      "payload": "git commit -m Update user authentication schema",
+      "observation": ""
+    },
+    "success_criteria": "Agent correctly resolves the failure. (Requires manual review)"
+  }
 }

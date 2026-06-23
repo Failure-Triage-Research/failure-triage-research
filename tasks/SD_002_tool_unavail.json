@@ -1,8 +1,23 @@
 {
+  "task_metadata": {
     "task_id": "SD_002_tool_unavail",
     "domain": "Software Dev",
-    "failure_type": "tool_unavailable",
-    "task_description": "Install the required 'express' and 'cors' dependencies for the Node.js applications.",
-    "current_action": "npm install express cors --save",
-    "error_message": "npm ERR! code ETIMEDOUT\nnpm EPR! syscall connect\nnpm ERR! network timeout at: https://registry.npmjs.org/express\nnpm ERR! network This is a problem related to network connectivity."
+    "failure_category": "tool_unavailable",
+    "target_recovery": "fix_and_retry"
+  },
+  "environment_setup": {
+    "filesystem_state": "Standard environment setup. (Requires manual review)",
+    "available_tools": [
+      "execute_bash"
+    ]
+  },
+  "evaluation_loop": {
+    "condition": "Install the required 'express' and 'cors' dependencies for the Node.js applications.",
+    "injected_failure_state": {
+      "tool": "execute_bash",
+      "payload": "npm install express cors --save",
+      "observation": "npm ERR! code ETIMEDOUT\nnpm EPR! syscall connect\nnpm ERR! network timeout at: https://registry.npmjs.org/express\nnpm ERR! network This is a problem related to network connectivity."
+    },
+    "success_criteria": "Agent correctly resolves the failure. (Requires manual review)"
+  }
 }

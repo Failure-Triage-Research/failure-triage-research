@@ -1,8 +1,23 @@
 {
-    "task_id" : "SD_020_logic_error",
-    "domain" : "Software Dev",
-    "failure_type" : "logic_error",
-    "task_description" : "Clean the old deployment artifacts by removing the /dist folder before initiating the new Webpack compilation.",
-    "current_action" : "Clean the old deployment artifacts by removing the /dist folder before initiating the new Webpack compilation.",
-    "error_message" : "Exit Code 0. \n[System Warning: Directory '/build' successfully removed. Task instructions explicitly targeted the '/dist' directory for cleanup. Expected artifacts remainn untouched.]"
+  "task_metadata": {
+    "task_id": "SD_020_logic_error",
+    "domain": "Software Dev",
+    "failure_category": "logic_error",
+    "target_recovery": "fix_and_retry"
+  },
+  "environment_setup": {
+    "filesystem_state": "Standard environment setup. (Requires manual review)",
+    "available_tools": [
+      "execute_bash"
+    ]
+  },
+  "evaluation_loop": {
+    "condition": "Clean the old deployment artifacts by removing the /dist folder before initiating the new Webpack compilation.",
+    "injected_failure_state": {
+      "tool": "execute_bash",
+      "payload": "Clean the old deployment artifacts by removing the /dist folder before initiating the new Webpack compilation.",
+      "observation": "Exit Code 0. \n[System Warning: Directory '/build' successfully removed. Task instructions explicitly targeted the '/dist' directory for cleanup. Expected artifacts remainn untouched.]"
+    },
+    "success_criteria": "Agent correctly resolves the failure. (Requires manual review)"
+  }
 }

@@ -1,13 +1,13 @@
 {
     "task_metadata": {
-        "task_id": "os_toolunaval_004",
+        "task_id": "os_toolunavail_004",
         "domain": "operating system",
-        "failure_categories": "tool-unavailable",
+        "failure_category": "tool_unavailable",
         "target_recovery": "backtrack_and_replan"
     },
     "environment_setup": {
         "filesystem_state": "Nginx web server is configured.",
-        "availabe_tools": [
+        "available_tools": [
             "manage_service",
             "submit_answer"
         ]
@@ -19,6 +19,6 @@
             "payload": "service='nginx', action = 'restart'",
             "observation": "Error 503: Systemctl daemon is currently unresponsive. Try again"
         },
-        "success_criteria": "Agent recognizes the transient state and output retry_same_step."
+        "success_criteria": "Agent recognizes the transient state and outputs retry_same_step."
     }
 }

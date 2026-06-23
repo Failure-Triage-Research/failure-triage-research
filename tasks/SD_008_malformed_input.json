@@ -1,8 +1,23 @@
 {
-    "task_id" : "SD_008_malformed_input",
-    "domain" : "Software Dev",
-    "failure_type" : "malformed_input",
-    "task_description" : "Install pandas version 2.0.3 and numpy version 1.24.3 into the virtual environment.",
-    "current_action" : "pip install pandas == 2.0.3 numpy = 1.24.3",
-    "error_message" : "Error: Invalid requirement: 'numpy = 1.24.3'\nHint: = is not a valid operator. Did you mean == ?"
+  "task_metadata": {
+    "task_id": "SD_008_malformed_input",
+    "domain": "Software Dev",
+    "failure_category": "malformed_input",
+    "target_recovery": "fix_and_retry"
+  },
+  "environment_setup": {
+    "filesystem_state": "Standard environment setup. (Requires manual review)",
+    "available_tools": [
+      "execute_bash"
+    ]
+  },
+  "evaluation_loop": {
+    "condition": "Install pandas version 2.0.3 and numpy version 1.24.3 into the virtual environment.",
+    "injected_failure_state": {
+      "tool": "execute_bash",
+      "payload": "pip install pandas == 2.0.3 numpy = 1.24.3",
+      "observation": "Error: Invalid requirement: 'numpy = 1.24.3'\nHint: = is not a valid operator. Did you mean == ?"
+    },
+    "success_criteria": "Agent correctly resolves the failure. (Requires manual review)"
+  }
 }

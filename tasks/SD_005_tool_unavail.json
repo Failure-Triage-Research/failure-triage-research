@@ -1,8 +1,23 @@
 {
-    "task_id" : "SD_005_tool_unavail",
-    "domain" : "Software Dev",
-    "failure_type" : "tool_unavailable",
-    "task_description" : "Download the required v1.4 Go compiler binary from the company's internal S3 asset bucket.",
-    "current_action" : "curl -0 https://s3.amazonaws.com/internal-corp-assets/go-compiler-v1.4.tar.gz",
-    "error_message" : "curl: (22) The requested URL returned error: 503 Service Unavailable. Backend fetch failed."
+  "task_metadata": {
+    "task_id": "SD_005_tool_unavail",
+    "domain": "Software Dev",
+    "failure_category": "tool_unavailable",
+    "target_recovery": "fix_and_retry"
+  },
+  "environment_setup": {
+    "filesystem_state": "Standard environment setup. (Requires manual review)",
+    "available_tools": [
+      "execute_bash"
+    ]
+  },
+  "evaluation_loop": {
+    "condition": "Download the required v1.4 Go compiler binary from the company's internal S3 asset bucket.",
+    "injected_failure_state": {
+      "tool": "execute_bash",
+      "payload": "curl -0 https://s3.amazonaws.com/internal-corp-assets/go-compiler-v1.4.tar.gz",
+      "observation": "curl: (22) The requested URL returned error: 503 Service Unavailable. Backend fetch failed."
+    },
+    "success_criteria": "Agent correctly resolves the failure. (Requires manual review)"
+  }
 }

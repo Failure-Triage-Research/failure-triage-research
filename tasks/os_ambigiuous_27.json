@@ -1,8 +1,23 @@
 {
+  "task_metadata": {
     "task_id": "os_ambigiuous_27",
-    "error_category": "ambigiuous",
-    "task_description": "install the node .js runtime enviroment.",
-    "current_action": "apt-get install nodejs",
-    "error_message": "Package nodejs is a virtual package provided by:nodejs-18.x,nodejs-20.x. You must explicitly select one to install.",
-    "attempt_count": 0
+    "domain": "Unknown",
+    "failure_category": "Unknown",
+    "target_recovery": "fix_and_retry"
+  },
+  "environment_setup": {
+    "filesystem_state": "Standard environment setup. (Requires manual review)",
+    "available_tools": [
+      "execute_bash"
+    ]
+  },
+  "evaluation_loop": {
+    "condition": "install the node .js runtime enviroment.",
+    "injected_failure_state": {
+      "tool": "execute_bash",
+      "payload": "apt-get install nodejs",
+      "observation": "Package nodejs is a virtual package provided by:nodejs-18.x,nodejs-20.x. You must explicitly select one to install."
+    },
+    "success_criteria": "Agent correctly resolves the failure. (Requires manual review)"
+  }
 }
