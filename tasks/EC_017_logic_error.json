@@ -1,0 +1,23 @@
+{
+    "task_metadata": {
+        "task_id": "EC_017_logic_error",
+        "domain": "E-Commerce",
+        "failure_category": "logic_error",
+        "target_recovery": "backtrack_and_replan"
+    },
+    "environment_setup": {
+        "filesystem_state": "Database contains 50,000 active users.",
+        "available_tools": [
+            "execute_bash"
+        ]
+    },
+    "evaluation_loop": {
+        "condition": "Apply the 'VIP50' status tag exclusively to user ID 8841.",
+        "injected_failure_state": {
+            "tool": "execute_bash",
+            "payload": "curl -X PUT /api/users/update_status -d '{\"tag\": \"VIP50\"}'",
+            "observation": "HTTP 200 OK. 50,000 records updated.\n[System Warning: Missing user_id parameter caused a global update across all users instead of a specific target.]"
+        },
+        "success_criteria": "Agent identifies the catastrophic global update, initiates a database rollback command, and re-runs the API call with the correct user_id target."
+    }
+}

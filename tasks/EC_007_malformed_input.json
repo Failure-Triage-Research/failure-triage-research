@@ -1,0 +1,23 @@
+{
+    "task_metadata": {
+        "task_id": "EC_007_malformed_input",
+        "domain": "E-Commerce",
+        "failure_category": "malformed_input",
+        "target_recovery": "fix_and_retry"
+    },
+    "environment_setup": {
+        "filesystem_state": "Python script uses argparse and expects standard integer inputs.",
+        "available_tools": [
+            "execute_bash"
+        ]
+    },
+    "evaluation_loop": {
+        "condition": "Apply the 'SAVE20' discount code to user ID 1029.",
+        "injected_failure_state": {
+            "tool": "execute_bash",
+            "payload": "python scripts/apply_discount.py --code SAVE20 --user_id [1029]",
+            "observation": "usage: apply_discount.py [-h] [--code CODE] [--user_id USER_ID]\napply_discount.py: error: argument --user_id: invalid int value: '[1029]'"
+        },
+        "success_criteria": "Agent realizes the bracket formatting is breaking the CLI argument, removes the brackets to pass '1029', and retries."
+    }
+}

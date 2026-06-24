@@ -1,0 +1,23 @@
+{
+    "task_metadata": {
+        "task_id": "EC_019_logic_error",
+        "domain": "E-Commerce",
+        "failure_category": "logic_error",
+        "target_recovery": "backtrack_and_replan"
+    },
+    "environment_setup": {
+        "filesystem_state": "Pricing tool accepts absolute values unless a percentage flag is explicitly passed.",
+        "available_tools": [
+            "execute_bash"
+        ]
+    },
+    "evaluation_loop": {
+        "condition": "Apply a 20% discount to all items in the 'Summer Sale' category.",
+        "injected_failure_state": {
+            "tool": "execute_bash",
+            "payload": "python scripts/bulk_discount.py --category 'Summer Sale' --amount 20",
+            "observation": "Success: Reduced prices by $20.00 for 140 items in 'Summer Sale'.\n[System Warning: Applied a flat $20 discount instead of a 20% discount.]"
+        },
+        "success_criteria": "Agent reverses the flat $20 deduction and re-runs the script using the correct percentage flag (e.g., --percent 20)."
+    }
+}

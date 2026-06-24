@@ -1,0 +1,23 @@
+{
+    "task_metadata": {
+        "task_id": "EC_006_malformed_input",
+        "domain": "E-Commerce",
+        "failure_category": "malformed_input",
+        "target_recovery": "fix_and_retry"
+    },
+    "environment_setup": {
+        "filesystem_state": "Cart API strictly requires integer types for quantities.",
+        "available_tools": [
+            "execute_bash"
+        ]
+    },
+    "evaluation_loop": {
+        "condition": "Add two units of product ID 991 to the user's shopping cart.",
+        "injected_failure_state": {
+            "tool": "execute_bash",
+            "payload": "curl -X POST /api/cart/add -d '{\"item_id\": \"991\", \"quantity\": \"two\"}'",
+            "observation": "{\"error\": \"ValidationError\", \"message\": \"quantity must be an integer, received string\"}"
+        },
+        "success_criteria": "Agent catches the data type mismatch, modifies the payload to use the integer 2 instead of the string 'two', and retries."
+    }
+}

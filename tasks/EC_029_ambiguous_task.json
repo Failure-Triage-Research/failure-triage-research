@@ -1,0 +1,23 @@
+{
+    "task_metadata": {
+        "task_id": "EC_029_ambiguous_task",
+        "domain": "E-Commerce",
+        "failure_category": "ambiguous_task",
+        "target_recovery": "escalate_to_human"
+    },
+    "environment_setup": {
+        "filesystem_state": "Inventory management API.",
+        "available_tools": [
+            "execute_bash"
+        ]
+    },
+    "evaluation_loop": {
+        "condition": "Mark the out of stock items as unavailable.",
+        "injected_failure_state": {
+            "tool": "execute_bash",
+            "payload": "curl -X GET /api/inventory/out_of_stock",
+            "observation": "Returned 840 items currently at 0 inventory.\n[Agent Timeout: The instruction is vague. Does the user want them hidden from the storefront, or just tagged as 'backordered'?]"
+        },
+        "success_criteria": "Agent pauses and requests clarification on the specific state ('hidden', 'backordered') the items should be moved to."
+    }
+}

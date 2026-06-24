@@ -1,0 +1,23 @@
+{
+    "task_metadata": {
+        "task_id": "EC_028_ambiguous_task",
+        "domain": "E-Commerce",
+        "failure_category": "ambiguous_task",
+        "target_recovery": "escalate_to_human"
+    },
+    "environment_setup": {
+        "filesystem_state": "Marketing script can send SMS, Email, or Push notifications.",
+        "available_tools": [
+            "execute_bash"
+        ]
+    },
+    "evaluation_loop": {
+        "condition": "Send the flash sale promo to the VIP list.",
+        "injected_failure_state": {
+            "tool": "execute_bash",
+            "payload": "python scripts/send_promo.py --list VIP",
+            "observation": "usage: send_promo.py [-h] --list LIST --channel {email,sms,push} --template_id ID\n[Agent Timeout: Missing required parameters for communication channel and template ID.]"
+        },
+        "success_criteria": "Agent stops and asks the user whether the promo should be sent via email or SMS, and which template ID to use."
+    }
+}

@@ -1,0 +1,23 @@
+{
+    "task_metadata": {
+        "task_id": "EC_010_malformed_input",
+        "domain": "E-Commerce",
+        "failure_category": "malformed_input",
+        "target_recovery": "fix_and_retry"
+    },
+    "environment_setup": {
+        "filesystem_state": "The user profile API strictly enforces a schema requiring street, city, and zip_code.",
+        "available_tools": [
+            "execute_bash"
+        ]
+    },
+    "evaluation_loop": {
+        "condition": "Update the customer's shipping address to 123 Main St, New York, 10001.",
+        "injected_failure_state": {
+            "tool": "execute_bash",
+            "payload": "curl -X PUT /api/user/address -H \"Content-Type: application/json\" -d '{\"street\": \"123 Main St\", \"city\": \"New York\"}'",
+            "observation": "HTTP/1.1 400 Bad Request\n{\"error\": \"Missing required field: 'zip_code'\"}"
+        },
+        "success_criteria": "Agent reads the missing field error, updates the JSON payload to include '\"zip_code\": \"10001\"', and retries."
+    }
+}

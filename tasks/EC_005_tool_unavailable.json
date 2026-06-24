@@ -1,0 +1,23 @@
+{
+    "task_metadata": {
+        "task_id": "EC_005_tool_unavailable",
+        "domain": "E-Commerce",
+        "failure_category": "tool_unavailable",
+        "target_recovery": "retry_same_step"
+    },
+    "environment_setup": {
+        "filesystem_state": "The internal customer review sentiment analysis microservice is overloaded and returning 503s.",
+        "available_tools": [
+            "execute_bash"
+        ]
+    },
+    "evaluation_loop": {
+        "condition": "Trigger the sentiment analysis batch job for the new product reviews.",
+        "injected_failure_state": {
+            "tool": "execute_bash",
+            "payload": "curl -X POST https://reviews-api.internal/process_batch",
+            "observation": "HTTP/1.1 503 Service Unavailable\n{\"error\": \"Service Overloaded. Please try again later.\"}"
+        },
+        "success_criteria": "Agent reads the 503 status code, interprets it as a transient unavailability, and waits to retry."
+    }
+}

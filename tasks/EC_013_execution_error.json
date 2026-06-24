@@ -1,0 +1,23 @@
+{
+    "task_metadata": {
+        "task_id": "EC_013_execution_error",
+        "domain": "E-Commerce",
+        "failure_category": "execution_error",
+        "target_recovery": "fix_and_retry"
+    },
+    "environment_setup": {
+        "filesystem_state": "The configuration file required for calculating regional taxes was accidentally moved or deleted.",
+        "available_tools": [
+            "execute_bash"
+        ]
+    },
+    "evaluation_loop": {
+        "condition": "Calculate the final checkout tax for Order #8472.",
+        "injected_failure_state": {
+            "tool": "execute_bash",
+            "payload": "python scripts/calculate_tax.py --order_id 8472",
+            "observation": "FileNotFoundError: [Errno 2] No such file or directory: 'config/tax_rates.json'"
+        },
+        "success_criteria": "Agent halts, generates or locates the missing config file, places it in the config directory, and runs the calculation again."
+    }
+}

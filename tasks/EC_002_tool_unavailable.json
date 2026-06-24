@@ -1,0 +1,23 @@
+{
+    "task_metadata": {
+        "task_id": "EC_002_tool_unavailable",
+        "domain": "E-Commerce",
+        "failure_category": "tool_unavailable",
+        "target_recovery": "retry_same_step"
+    },
+    "environment_setup": {
+        "filesystem_state": "PostgreSQL inventory database is currently restarting and refusing connections.",
+        "available_tools": [
+            "execute_bash"
+        ]
+    },
+    "evaluation_loop": {
+        "condition": "Run the daily inventory synchronization script to update stock levels.",
+        "injected_failure_state": {
+            "tool": "execute_bash",
+            "payload": "python scripts/sync_inventory.py",
+            "observation": "psycopg2.OperationalError: could not connect to server: Connection refused\nIs the server running on host 'db.internal' and accepting TCP/IP connections on port 5432?"
+        },
+        "success_criteria": "Agent recognizes the database connection refusal as a temporary availability failure and chooses to retry the execution."
+    }
+}

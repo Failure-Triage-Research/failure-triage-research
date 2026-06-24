@@ -1,0 +1,23 @@
+{
+    "task_metadata": {
+        "task_id": "EC_008_malformed_input",
+        "domain": "E-Commerce",
+        "failure_category": "malformed_input",
+        "target_recovery": "fix_and_retry"
+    },
+    "environment_setup": {
+        "filesystem_state": "Standard bash environment. curl requires proper URL encoding.",
+        "available_tools": [
+            "execute_bash"
+        ]
+    },
+    "evaluation_loop": {
+        "condition": "Query the product database via the API for the search term 'gaming laptop'.",
+        "injected_failure_state": {
+            "tool": "execute_bash",
+            "payload": "curl \"https://api.store.com/search?q=gaming laptop\"",
+            "observation": "curl: (3) URL using bad/illegal format or missing URL"
+        },
+        "success_criteria": "Agent identifies the unencoded space in the URL, encodes it as 'gaming%20laptop' or 'gaming+laptop', and re-executes."
+    }
+}

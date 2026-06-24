@@ -1,0 +1,23 @@
+{
+    "task_metadata": {
+        "task_id": "EC_004_tool_unavailable",
+        "domain": "E-Commerce",
+        "failure_category": "tool_unavailable",
+        "target_recovery": "retry_same_step"
+    },
+    "environment_setup": {
+        "filesystem_state": "Internal Redis cache for active shopping carts is temporarily dropping packets.",
+        "available_tools": [
+            "execute_bash"
+        ]
+    },
+    "evaluation_loop": {
+        "condition": "Ping the shopping cart Redis cache to ensure it is healthy before deploying the frontend update.",
+        "injected_failure_state": {
+            "tool": "execute_bash",
+            "payload": "redis-cli -h cache.internal.store ping",
+            "observation": "Could not connect to Redis at cache.internal.store:6379: Connection timed out"
+        },
+        "success_criteria": "Agent identifies the connection timeout to the cache layer and retries."
+    }
+}

@@ -1,0 +1,23 @@
+{
+    "task_metadata": {
+        "task_id": "EC_014_execution_error",
+        "domain": "E-Commerce",
+        "failure_category": "execution_error",
+        "target_recovery": "fix_and_retry"
+    },
+    "environment_setup": {
+        "filesystem_state": "The automated UI checkout testing suite requires selenium and chromedriver, but chromedriver is missing from the PATH.",
+        "available_tools": [
+            "execute_bash"
+        ]
+    },
+    "evaluation_loop": {
+        "condition": "Run the automated end-to-end test for the guest checkout flow.",
+        "injected_failure_state": {
+            "tool": "execute_bash",
+            "payload": "pytest tests/test_checkout_flow.py",
+            "observation": "selenium.common.exceptions.SessionNotCreatedException: Message: 'chromedriver' executable needs to be in PATH."
+        },
+        "success_criteria": "Agent identifies the missing web driver, installs or links chromedriver to the execution PATH, and retries the test."
+    }
+}

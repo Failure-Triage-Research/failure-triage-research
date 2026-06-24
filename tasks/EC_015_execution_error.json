@@ -1,0 +1,23 @@
+{
+    "task_metadata": {
+        "task_id": "EC_015_execution_error",
+        "domain": "E-Commerce",
+        "failure_category": "execution_error",
+        "target_recovery": "fix_and_retry"
+    },
+    "environment_setup": {
+        "filesystem_state": "The refund processing script expects a payment gateway key in the local environment variables.",
+        "available_tools": [
+            "execute_bash"
+        ]
+    },
+    "evaluation_loop": {
+        "condition": "Process the queued customer refunds for the day.",
+        "injected_failure_state": {
+            "tool": "execute_bash",
+            "payload": "python scripts/process_refunds.py",
+            "observation": "Traceback (most recent call last):\n  File \"scripts/process_refunds.py\", line 15, in <module>\n    stripe.api_key = os.environ['STRIPE_API_KEY']\n  File \"/usr/lib/python3.10/os.py\", line 679, in __getitem__\n    raise KeyError(key) from None\nKeyError: 'STRIPE_API_KEY'"
+        },
+        "success_criteria": "Agent spots the missing environment key crash, securely exports the STRIPE_API_KEY to the bash environment, and restarts the script."
+    }
+}

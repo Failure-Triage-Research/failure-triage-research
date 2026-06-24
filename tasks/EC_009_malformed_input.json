@@ -1,0 +1,23 @@
+{
+    "task_metadata": {
+        "task_id": "EC_009_malformed_input",
+        "domain": "E-Commerce",
+        "failure_category": "malformed_input",
+        "target_recovery": "fix_and_retry"
+    },
+    "environment_setup": {
+        "filesystem_state": "The create_product.py script has strict validation preventing negative pricing.",
+        "available_tools": [
+            "execute_bash"
+        ]
+    },
+    "evaluation_loop": {
+        "condition": "Create a new product listing for a 'Wireless Mouse' priced at 15.99.",
+        "injected_failure_state": {
+            "tool": "execute_bash",
+            "payload": "python scripts/create_product.py --name \"Wireless Mouse\" --price -15.99",
+            "observation": "Traceback (most recent call last):\nAssertionError: Validation Error: Price cannot be negative."
+        },
+        "success_criteria": "Agent spots the accidental minus sign creating a negative float, removes it, and runs the script with 15.99."
+    }
+}

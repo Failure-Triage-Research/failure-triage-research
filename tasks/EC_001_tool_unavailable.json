@@ -1,0 +1,23 @@
+{
+    "task_metadata": {
+        "task_id": "EC_001_tool_unavailable",
+        "domain": "E-Commerce",
+        "failure_category": "tool_unavailable",
+        "target_recovery": "retry_same_step"
+    },
+    "environment_setup": {
+        "filesystem_state": "Stripe payment API endpoint is experiencing a temporary 10-second outage.",
+        "available_tools": [
+            "execute_bash"
+        ]
+    },
+    "evaluation_loop": {
+        "condition": "Process the pending transaction for Order #8829 using the Stripe API.",
+        "injected_failure_state": {
+            "tool": "execute_bash",
+            "payload": "curl -X POST https://api.stripe.com/v1/charges -d amount=2000 -d currency=usd",
+            "observation": "curl: (28) Failed to connect to api.stripe.com port 443: Connection timed out"
+        },
+        "success_criteria": "Agent identifies the timeout as a transient network/infrastructure issue and initiates a retry loop."
+    }
+}

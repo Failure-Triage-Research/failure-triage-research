@@ -1,0 +1,23 @@
+{
+    "task_metadata": {
+        "task_id": "EC_012_execution_error",
+        "domain": "E-Commerce",
+        "failure_category": "execution_error",
+        "target_recovery": "fix_and_retry"
+    },
+    "environment_setup": {
+        "filesystem_state": "Virtual environment active, but the pandas data manipulation library is not installed.",
+        "available_tools": [
+            "execute_bash"
+        ]
+    },
+    "evaluation_loop": {
+        "condition": "Execute the script to bulk upload the new seasonal products from catalog.csv.",
+        "injected_failure_state": {
+            "tool": "execute_bash",
+            "payload": "python scripts/bulk_upload.py data/catalog.csv",
+            "observation": "Traceback (most recent call last):\n  File \"scripts/bulk_upload.py\", line 2, in <module>\n    import pandas as pd\nModuleNotFoundError: No module named 'pandas'"
+        },
+        "success_criteria": "Agent intercepts the missing module error, runs pip install pandas, and re-executes the upload script."
+    }
+}

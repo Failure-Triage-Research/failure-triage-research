@@ -1,0 +1,23 @@
+{
+    "task_metadata": {
+        "task_id": "EC_011_execution_error",
+        "domain": "E-Commerce",
+        "failure_category": "execution_error",
+        "target_recovery": "fix_and_retry"
+    },
+    "environment_setup": {
+        "filesystem_state": "The monthly sales dataset is 3GB. Default Node.js memory limit is 512MB.",
+        "available_tools": [
+            "execute_bash"
+        ]
+    },
+    "evaluation_loop": {
+        "condition": "Generate the automated monthly sales report from the aggregate data.",
+        "injected_failure_state": {
+            "tool": "execute_bash",
+            "payload": "node scripts/generate_sales_report.js",
+            "observation": "FATAL ERROR: Ineffective mark-compacts near heap limit Allocation failed - JavaScript heap out of memory"
+        },
+        "success_criteria": "Agent recognizes the OOM crash and alters the execution environment (e.g., node --max-old-space-size=4096) before retrying."
+    }
+}
