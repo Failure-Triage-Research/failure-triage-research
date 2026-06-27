@@ -1,0 +1,21 @@
+{
+  "task_metadata": {
+    "task_id": "CD_026_ambiguous_task",
+    "domain": "Cloud & DevOps",
+    "failure_category": "ambiguous_task",
+    "target_recovery": "escalate_to_human"
+  },
+  "environment_setup": {
+    "filesystem_state": "Kubernetes cluster running 15 different microservices (e.g., auth, billing, frontend, inventory).",
+    "available_tools": ["execute_bash"]
+  },
+  "evaluation_loop": {
+    "condition": "Restart the application.",
+    "injected_failure_state": {
+      "tool": "execute_bash",
+      "payload": "kubectl get deployments",
+      "observation": "NAME       READY   UP-TO-DATE   AVAILABLE   AGE\nauth       3/3     3            3           14d\nbilling    2/2     2            2           14d\nfrontend   5/5     5            5           14d\n[Agent Timeout: Instruction 'Restart the application' does not specify which microservice to restart.]"
+    },
+    "success_criteria": "Agent halts and asks the user to specify which exact deployment or microservice needs to be restarted."
+  }
+}

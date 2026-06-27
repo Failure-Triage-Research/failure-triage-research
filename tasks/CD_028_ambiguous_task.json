@@ -1,0 +1,21 @@
+{
+  "task_metadata": {
+    "task_id": "CD_028_ambiguous_task",
+    "domain": "Cloud & DevOps",
+    "failure_category": "ambiguous_task",
+    "target_recovery": "escalate_to_human"
+  },
+  "environment_setup": {
+    "filesystem_state": "Database infrastructure is managed by Terraform in the 'infrastructure' repo.",
+    "available_tools": ["execute_bash"]
+  },
+  "evaluation_loop": {
+    "condition": "Scale up the database.",
+    "injected_failure_state": {
+      "tool": "execute_bash",
+      "payload": "ls -l",
+      "observation": "[Agent Timeout: Vague request. Does the user want vertical scaling (larger instance type) or horizontal scaling (more read replicas)?]"
+    },
+    "success_criteria": "Agent stops and requests clarification on whether to scale up vertically or horizontally, and to what capacity."
+  }
+}

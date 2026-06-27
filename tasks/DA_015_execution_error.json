@@ -1,0 +1,21 @@
+{
+  "task_metadata": {
+    "task_id": "DA_015_execution_error",
+    "domain": "Data & Analytics",
+    "failure_category": "execution_error",
+    "target_recovery": "fix_and_retry"
+  },
+  "environment_setup": {
+    "filesystem_state": "Jupyter Notebook execution via CLI. The notebook contains a heavy query that takes 3 minutes.",
+    "available_tools": ["execute_bash"]
+  },
+  "evaluation_loop": {
+    "condition": "Execute the automated Jupyter Notebook report and convert it to HTML.",
+    "injected_failure_state": {
+      "tool": "execute_bash",
+      "payload": "jupyter nbconvert --to html --execute reports/monthly_analysis.ipynb",
+      "observation": "TimeoutError: Cell execution timed out, see log for details. (Default timeout is 30s)"
+    },
+    "success_criteria": "Agent notices the default timeout crash, adds the '--ExecutePreprocessor.timeout=-1' flag to disable the timeout, and retries."
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "task_metadata": {
+    "task_id": "DA_011_execution_error",
+    "domain": "Data & Analytics",
+    "failure_category": "execution_error",
+    "target_recovery": "fix_and_retry"
+  },
+  "environment_setup": {
+    "filesystem_state": "Pandas script attempts to group data by 'revenue', but the CSV column is named 'total_revenue'.",
+    "available_tools": ["execute_bash"]
+  },
+  "evaluation_loop": {
+    "condition": "Run the financial aggregation script to summarize the quarterly data.",
+    "injected_failure_state": {
+      "tool": "execute_bash",
+      "payload": "python scripts/aggregate_financials.py",
+      "observation": "Traceback (most recent call last):\n  File \"scripts/aggregate_financials.py\", line 18, in <module>\n    grouped = df.groupby('revenue').sum()\nKeyError: 'revenue'"
+    },
+    "success_criteria": "Agent intercepts the KeyError, opens the script or dataset to verify column names, modifies the script to use 'total_revenue', and retries."
+  }
+}

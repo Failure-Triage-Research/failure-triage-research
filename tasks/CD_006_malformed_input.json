@@ -1,0 +1,21 @@
+{
+  "task_metadata": {
+    "task_id": "CD_006_malformed_input",
+    "domain": "Cloud & DevOps",
+    "failure_category": "malformed_input",
+    "target_recovery": "fix_and_retry"
+  },
+  "environment_setup": {
+    "filesystem_state": "AWS CLI installed. Target S3 bucket requires an exact ARN format.",
+    "available_tools": ["execute_bash"]
+  },
+  "evaluation_loop": {
+    "condition": "Apply the new bucket policy to restrict public access.",
+    "injected_failure_state": {
+      "tool": "execute_bash",
+      "payload": "aws s3api put-bucket-policy --bucket my-secure-bucket --policy file://policy.json",
+      "observation": "An error occurred (MalformedPolicy) when calling the PutBucketPolicy operation: Policy has invalid resource: my-secure-bucket"
+    },
+    "success_criteria": "Agent checks 'policy.json', identifies that the resource is missing the 'arn:aws:s3:::' prefix, fixes the JSON file, and retries."
+  }
+}

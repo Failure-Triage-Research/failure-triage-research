@@ -1,0 +1,21 @@
+{
+  "task_metadata": {
+    "task_id": "DA_009_malformed_input",
+    "domain": "Data & Analytics",
+    "failure_category": "malformed_input",
+    "target_recovery": "fix_and_retry"
+  },
+  "environment_setup": {
+    "filesystem_state": "Matplotlib visualization script requires valid hex codes or standard string colors.",
+    "available_tools": ["execute_bash"]
+  },
+  "evaluation_loop": {
+    "condition": "Generate a bar chart of the sales data colored in standard blue.",
+    "injected_failure_state": {
+      "tool": "execute_bash",
+      "payload": "python scripts/generate_chart.py --type bar --color 'dark-blu'",
+      "observation": "ValueError: 'dark-blu' is not a valid value for color; supported values are 'b', 'g', 'r', 'c', 'm', 'y', 'k', 'w', or valid hex strings."
+    },
+    "success_criteria": "Agent catches the color string typo, updates the payload to a valid color like 'b' or 'blue', and runs the generation script again."
+  }
+}

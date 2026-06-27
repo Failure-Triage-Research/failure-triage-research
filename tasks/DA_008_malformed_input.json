@@ -1,0 +1,21 @@
+{
+  "task_metadata": {
+    "task_id": "DA_008_malformed_input",
+    "domain": "Data & Analytics",
+    "failure_category": "malformed_input",
+    "target_recovery": "fix_and_retry"
+  },
+  "environment_setup": {
+    "filesystem_state": "PyTorch training script utilizes argparse and requires the learning rate to be a float.",
+    "available_tools": ["execute_bash"]
+  },
+  "evaluation_loop": {
+    "condition": "Start the model training script with a learning rate of 0.001.",
+    "injected_failure_state": {
+      "tool": "execute_bash",
+      "payload": "python scripts/train_model.py --lr 1e-3x",
+      "observation": "usage: train_model.py [-h] [--lr LR]\ntrain_model.py: error: argument --lr: invalid float value: '1e-3x'"
+    },
+    "success_criteria": "Agent identifies the typo 'x' in the scientific notation, corrects the learning rate to '1e-3' or '0.001', and retries."
+  }
+}

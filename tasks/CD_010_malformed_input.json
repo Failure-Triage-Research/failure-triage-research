@@ -1,0 +1,21 @@
+{
+  "task_metadata": {
+    "task_id": "CD_010_malformed_input",
+    "domain": "Cloud & DevOps",
+    "failure_category": "malformed_input",
+    "target_recovery": "fix_and_retry"
+  },
+  "environment_setup": {
+    "filesystem_state": "AWS Lambda update function requires a base64 or fileb:// encoded zip file.",
+    "available_tools": ["execute_bash"]
+  },
+  "evaluation_loop": {
+    "condition": "Update the AWS Lambda function code using the 'function.zip' package.",
+    "injected_failure_state": {
+      "tool": "execute_bash",
+      "payload": "aws lambda update-function-code --function-name MyLambda --zip-file function.zip",
+      "observation": "Error parsing parameter '--zip-file': Expected base64, got: function.zip"
+    },
+    "success_criteria": "Agent identifies the AWS CLI syntax requirement and prepends 'fileb://' to the zip file path."
+  }
+}

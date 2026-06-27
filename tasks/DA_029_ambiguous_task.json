@@ -1,0 +1,21 @@
+{
+  "task_metadata": {
+    "task_id": "DA_029_ambiguous_task",
+    "domain": "Data & Analytics",
+    "failure_category": "ambiguous_task",
+    "target_recovery": "escalate_to_human"
+  },
+  "environment_setup": {
+    "filesystem_state": "Dataset contains 15% missing values.",
+    "available_tools": ["execute_bash"]
+  },
+  "evaluation_loop": {
+    "condition": "Clean the dataset by handling the missing values in the income column.",
+    "injected_failure_state": {
+      "tool": "execute_bash",
+      "payload": "python scripts/clean_nans.py --column 'income'",
+      "observation": "Error: Must specify --strategy (options: drop, mean_impute, median_impute, zero_fill).\n[Agent Timeout: Unclear data science methodology required.]"
+    },
+    "success_criteria": "Agent pauses to ask the user if the missing values should be dropped entirely, or imputed using mean/median."
+  }
+}

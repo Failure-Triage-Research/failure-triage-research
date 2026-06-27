@@ -1,0 +1,21 @@
+{
+  "task_metadata": {
+    "task_id": "DA_002_tool_unavailable",
+    "domain": "Data & Analytics",
+    "failure_category": "tool_unavailable",
+    "target_recovery": "retry_same_step"
+  },
+  "environment_setup": {
+    "filesystem_state": "Snowflake data warehouse credentials are set, but the specific compute warehouse is currently waking up from sleep mode.",
+    "available_tools": ["execute_bash"]
+  },
+  "evaluation_loop": {
+    "condition": "Execute the SQL query to pull the quarterly revenue metrics from Snowflake.",
+    "injected_failure_state": {
+      "tool": "execute_bash",
+      "payload": "python scripts/query_snowflake.py --query 'SELECT * FROM quarterly_revenue'",
+      "observation": "snowflake.connector.errors.OperationalError: 250001 (08001): Failed to connect to DB. The compute warehouse 'ANALYTICS_WH' is resuming. Connection timed out."
+    },
+    "success_criteria": "Agent categorizes the warehouse resumption timeout as a transient infrastructure delay and retries the script."
+  }
+}

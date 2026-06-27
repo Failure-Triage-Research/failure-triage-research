@@ -1,0 +1,21 @@
+{
+  "task_metadata": {
+    "task_id": "DA_001_tool_unavailable",
+    "domain": "Data & Analytics",
+    "failure_category": "tool_unavailable",
+    "target_recovery": "retry_same_step"
+  },
+  "environment_setup": {
+    "filesystem_state": "Kaggle API key is configured. The Kaggle servers are experiencing high traffic.",
+    "available_tools": ["execute_bash"]
+  },
+  "evaluation_loop": {
+    "condition": "Download the raw e-commerce customer behavior dataset from Kaggle.",
+    "injected_failure_state": {
+      "tool": "execute_bash",
+      "payload": "kaggle datasets download -d mkechinov/ecommerce-behavior-data-from-multi-category-store",
+      "observation": "503 Service Unavailable: The Kaggle API is currently down for maintenance. Please try again later."
+    },
+    "success_criteria": "Agent recognizes the 503 server error from Kaggle and loops to retry the download."
+  }
+}

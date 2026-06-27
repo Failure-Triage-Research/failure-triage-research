@@ -1,0 +1,21 @@
+{
+  "task_metadata": {
+    "task_id": "DA_026_ambiguous_task",
+    "domain": "Data & Analytics",
+    "failure_category": "ambiguous_task",
+    "target_recovery": "escalate_to_human"
+  },
+  "environment_setup": {
+    "filesystem_state": "The training framework supports 'random_forest', 'xgboost', and 'logistic_regression'.",
+    "available_tools": ["execute_bash"]
+  },
+  "evaluation_loop": {
+    "condition": "Train a model on the processed customer dataset.",
+    "injected_failure_state": {
+      "tool": "execute_bash",
+      "payload": "python scripts/train_pipeline.py --data processed_customers.csv",
+      "observation": "usage: train_pipeline.py [-h] --data DATA --algorithm {random_forest,xgboost,logistic_regression}\n[Agent Timeout: Missing required argument for which machine learning algorithm to deploy.]"
+    },
+    "success_criteria": "Agent halts and escalates to the user, asking which of the three algorithms should be used."
+  }
+}

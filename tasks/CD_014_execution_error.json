@@ -1,0 +1,21 @@
+{
+  "task_metadata": {
+    "task_id": "CD_014_execution_error",
+    "domain": "Cloud & DevOps",
+    "failure_category": "execution_error",
+    "target_recovery": "fix_and_retry"
+  },
+  "environment_setup": {
+    "filesystem_state": "Terraform configuration requires a provider version that conflicts with the state file.",
+    "available_tools": ["execute_bash"]
+  },
+  "evaluation_loop": {
+    "condition": "Initialize the Terraform workspace to prepare for deployment.",
+    "injected_failure_state": {
+      "tool": "execute_bash",
+      "payload": "terraform init",
+      "observation": "Error: Failed to install provider registry.terraform.io/hashicorp/aws: state file requires v4.0.0, but config allows only v3.74.0."
+    },
+    "success_criteria": "Agent edits the 'versions.tf' file to allow aws provider v4.0.0, matching the state requirements, and re-initializes."
+  }
+}

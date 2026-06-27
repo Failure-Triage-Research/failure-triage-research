@@ -1,0 +1,21 @@
+{
+  "task_metadata": {
+    "task_id": "DA_004_tool_unavailable",
+    "domain": "Data & Analytics",
+    "failure_category": "tool_unavailable",
+    "target_recovery": "retry_same_step"
+  },
+  "environment_setup": {
+    "filesystem_state": "HuggingFace model hub is dropping connections due to a DNS resolution failure.",
+    "available_tools": ["execute_bash"]
+  },
+  "evaluation_loop": {
+    "condition": "Download the pre-trained BERT sentiment analysis model weights.",
+    "injected_failure_state": {
+      "tool": "execute_bash",
+      "payload": "python -c \"from transformers import AutoModel; AutoModel.from_pretrained('bert-base-uncased')\"",
+      "observation": "huggingface_hub.utils._errors.LocalEntryNotFoundError: Connection error, and we cannot find the requested files in the cached path. (Max retries exceeded with url)"
+    },
+    "success_criteria": "Agent identifies the network connection error to HuggingFace and triggers a retry to fetch the weights."
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "task_metadata": {
+    "task_id": "CD_029_ambiguous_task",
+    "domain": "Cloud & DevOps",
+    "failure_category": "ambiguous_task",
+    "target_recovery": "escalate_to_human"
+  },
+  "environment_setup": {
+    "filesystem_state": "GitHub Actions workflow file exists with deploy, test, and lint jobs.",
+    "available_tools": ["execute_bash"]
+  },
+  "evaluation_loop": {
+    "condition": "Trigger the CI/CD pipeline.",
+    "injected_failure_state": {
+      "tool": "execute_bash",
+      "payload": "gh workflow run",
+      "observation": "error: required argument <workflow> not provided.\n[Agent Timeout: Instruction does not specify which workflow to run or which branch to target.]"
+    },
+    "success_criteria": "Agent asks the human to specify the workflow name and target Git branch."
+  }
+}

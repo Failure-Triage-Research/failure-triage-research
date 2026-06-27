@@ -1,0 +1,21 @@
+{
+  "task_metadata": {
+    "task_id": "CD_013_execution_error",
+    "domain": "Cloud & DevOps",
+    "failure_category": "execution_error",
+    "target_recovery": "fix_and_retry"
+  },
+  "environment_setup": {
+    "filesystem_state": "Kubernetes cluster deployed a pod, but the pod is missing a required ConfigMap.",
+    "available_tools": ["execute_bash"]
+  },
+  "evaluation_loop": {
+    "condition": "Verify the newly deployed app is running successfully.",
+    "injected_failure_state": {
+      "tool": "execute_bash",
+      "payload": "kubectl get pods",
+      "observation": "NAME         READY   STATUS             RESTARTS   AGE\napp-server   0/1     CreateContainerConfigError   0          12s"
+    },
+    "success_criteria": "Agent describes the pod to find the missing ConfigMap, creates the ConfigMap, and waits for the pod to reach a Running state."
+  }
+}

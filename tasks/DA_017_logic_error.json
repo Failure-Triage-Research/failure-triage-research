@@ -1,0 +1,21 @@
+{
+  "task_metadata": {
+    "task_id": "DA_017_logic_error",
+    "domain": "Data & Analytics",
+    "failure_category": "logic_error",
+    "target_recovery": "backtrack_and_replan"
+  },
+  "environment_setup": {
+    "filesystem_state": "SQL database with 'customers' and 'orders' tables.",
+    "available_tools": ["execute_bash"]
+  },
+  "evaluation_loop": {
+    "condition": "Generate a report of all customers and their total order amounts, including customers who have made zero orders.",
+    "injected_failure_state": {
+      "tool": "execute_bash",
+      "payload": "psql -c \"SELECT c.name, SUM(o.amount) FROM customers c INNER JOIN orders o ON c.id = o.customer_id GROUP BY c.name;\"",
+      "observation": "Exit Code 0. Returned 450 rows.\n[System Warning: Used INNER JOIN. Customers with zero orders were completely excluded from the result set.]"
+    },
+    "success_criteria": "Agent recognizes that an INNER JOIN drops unmatched records, rewrites the query to use a LEFT JOIN, and re-executes."
+  }
+}

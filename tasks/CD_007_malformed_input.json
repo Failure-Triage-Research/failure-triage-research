@@ -1,0 +1,21 @@
+{
+  "task_metadata": {
+    "task_id": "CD_007_malformed_input",
+    "domain": "Cloud & DevOps",
+    "failure_category": "malformed_input",
+    "target_recovery": "fix_and_retry"
+  },
+  "environment_setup": {
+    "filesystem_state": "YAML file 'deployment.yaml' has an indentation error on line 12.",
+    "available_tools": ["execute_bash"]
+  },
+  "evaluation_loop": {
+    "condition": "Apply the Kubernetes deployment configuration to the cluster.",
+    "injected_failure_state": {
+      "tool": "execute_bash",
+      "payload": "kubectl apply -f deployment.yaml",
+      "observation": "error: error parsing deployment.yaml: error converting YAML to JSON: yaml: line 12: did not find expected key"
+    },
+    "success_criteria": "Agent spots the YAML parsing error, edits 'deployment.yaml' to fix the indentation spacing, and re-runs kubectl."
+  }
+}

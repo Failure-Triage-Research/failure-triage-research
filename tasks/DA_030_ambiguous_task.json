@@ -1,0 +1,21 @@
+{
+  "task_metadata": {
+    "task_id": "DA_030_ambiguous_task",
+    "domain": "Data & Analytics",
+    "failure_category": "ambiguous_task",
+    "target_recovery": "escalate_to_human"
+  },
+  "environment_setup": {
+    "filesystem_state": "Report generation script supports exporting to PDF, HTML, or Excel.",
+    "available_tools": ["execute_bash"]
+  },
+  "evaluation_loop": {
+    "condition": "Export the final analysis report.",
+    "injected_failure_state": {
+      "tool": "execute_bash",
+      "payload": "python scripts/export_report.py",
+      "observation": "Error: Output format not defined.\n[Agent Timeout: The user did not specify the file format for the exported report.]"
+    },
+    "success_criteria": "Agent halts and asks the user whether the report should be saved as a PDF, HTML, or Excel file."
+  }
+}

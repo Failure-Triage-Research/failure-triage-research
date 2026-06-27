@@ -1,0 +1,21 @@
+{
+  "task_metadata": {
+    "task_id": "DA_027_ambiguous_task",
+    "domain": "Data & Analytics",
+    "failure_category": "ambiguous_task",
+    "target_recovery": "escalate_to_human"
+  },
+  "environment_setup": {
+    "filesystem_state": "Data extraction script requires start_date and end_date.",
+    "available_tools": ["execute_bash"]
+  },
+  "evaluation_loop": {
+    "condition": "Pull the sales data report from the database.",
+    "injected_failure_state": {
+      "tool": "execute_bash",
+      "payload": "python scripts/extract_sales.py",
+      "observation": "Error: Missing required parameters: --start_date, --end_date.\n[Agent Timeout: Instruction does not specify the time frame (e.g., Q1, Last Month, YTD) for the sales data.]"
+    },
+    "success_criteria": "Agent asks the human to specify the exact date range for the extraction."
+  }
+}

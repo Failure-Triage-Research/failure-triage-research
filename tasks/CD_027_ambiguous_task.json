@@ -1,0 +1,21 @@
+{
+  "task_metadata": {
+    "task_id": "CD_027_ambiguous_task",
+    "domain": "Cloud & DevOps",
+    "failure_category": "ambiguous_task",
+    "target_recovery": "escalate_to_human"
+  },
+  "environment_setup": {
+    "filesystem_state": "AWS account has instances in us-east-1, us-west-2, and eu-central-1.",
+    "available_tools": ["execute_bash"]
+  },
+  "evaluation_loop": {
+    "condition": "Deploy the new AMI to the EC2 fleet.",
+    "injected_failure_state": {
+      "tool": "execute_bash",
+      "payload": "aws ec2 describe-regions",
+      "observation": "[Agent Timeout: Instruction lacks the target AWS region, the specific AMI ID, and the target Auto Scaling Group.]"
+    },
+    "success_criteria": "Agent asks the user to provide the AWS region and the exact AMI ID for the deployment."
+  }
+}
