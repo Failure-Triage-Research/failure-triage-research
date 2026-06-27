@@ -6,8 +6,8 @@ from datetime import datetime
 
 # Import your compiled LangGraph applications
 # (Adjust these import names based on what you named them in your actual files)
-from baseline_agent import baseline_app
-from triage_agent import triage_app
+from baseline_agent import app as baseline_app
+from triage_agent import app as triage_app
 
 # --- DIRECTORY SETUP ---
 TASKS_DIR = "tasks/"
@@ -82,11 +82,10 @@ def execute_data_bridge():
             file_path = os.path.join(TASKS_DIR, filename)
             print(f"[*] Processing Task: {filename}")
             
-            # 12 spaces indentation
             with open(file_path, 'r') as json_file:
                 task_data = json.load(json_file)
     
-            # Map JSON data to your LangGraph State Format (Now safely inside the loop)
+            # Map JSON data to your LangGraph State Format
             agent_state = {
                 "task_description": task_data.get("task_description", ""),
                 "current_action": task_data.get("current_action", ""),
@@ -94,7 +93,7 @@ def execute_data_bridge():
                 "task_success": False,
                 "triage_loops": 0,
                 "recovery_strategy": "none",
-                # The kill-switch guardrail ensures it doesnt loop forever
+                # The kill-switch guardrail ensures it doesn't loop forever
                 "max_retries": 3
             }
 
@@ -102,28 +101,36 @@ def execute_data_bridge():
             b_success, _, _, b_time = run_agent(baseline_app, agent_state, "Baseline Agent")
             t_success, t_loops, t_strategy, t_time = run_agent(triage_app, agent_state, "Triage Agent")
 
-            # 4. Log the Metrics
+            triage_action = agent_state.get("current_action") 
+
+            # We pass that action to the grader to get an impartial PASS/FAIL
+            from grader import evaluate_agent_action
+            passed, reasoning = evaluate_agent_action(task_data, triage_action)
+
+            print(f"    [Judge Grader] Result: {'PASS' if passed else 'FAIL'} | Reason: {reasoning}")
+
+            # 4. Log the Metrics (WRITTEN ONLY ONCE)
             writer.writerow([
                 task_data.get("task_id", "unknown"),
                 task_data.get("domain", "unknown"),
                 task_data.get("failure_type", "unknown"),
                 b_success,
-                t_success,
+                passed,          # Impartial score from the LLM Judge
                 t_loops,
                 t_strategy,
                 b_time,
                 t_time
             ])
             
-            print(f"        [+] Logged | Baseline: {'PASS' if b_success else 'FAIL'} | Triage: {'PASS' if t_success else 'FAIL'} ({t_strategy})\n" )
+            print(f"        [+] Logged | Baseline: {'PASS' if b_success else 'FAIL'} | Judge Grader: {'PASS' if passed else 'FAIL'} ({t_strategy})\n")
 
             time.sleep(1)
 
-    # These are now properly inside the function (4 spaces)
     print("===============================================================")
     print("Evaluation Pipeline Complete.")
     print(f"[*] Results saved to: {MASTER_LOG_FILE}")
     print("===============================================================")
+
 
 if __name__ == "__main__":
     execute_data_bridge()
