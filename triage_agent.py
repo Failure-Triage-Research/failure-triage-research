@@ -1,6 +1,6 @@
 from typing import TypedDict, Optional
 from langgraph.graph import StateGraph, END
-from langchain_community.llms import Ollama
+from langchain_ollama import OllamaLLM
 from langchain_core.prompts import PromptTemplate
 
 # 1. THE STATE
@@ -13,7 +13,7 @@ class AgentState(TypedDict):
 
 
 # Connect to your Local Llama 3.1 8B via Ollama
-local_llm = Ollama(model="llama3.1:8b")
+local_llm = OllamaLLM(model="llama3.1")
 
 
 # 2. THE EXECUTOR NODE
