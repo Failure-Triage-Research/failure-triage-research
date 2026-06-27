@@ -1,0 +1,21 @@
+{
+  "task_metadata": {
+    "task_id": "CD_011_execution_error",
+    "domain": "Cloud & DevOps",
+    "failure_category": "execution_error",
+    "target_recovery": "fix_and_retry"
+  },
+  "environment_setup": {
+    "filesystem_state": "IAM role is active, but lacks 'ec2:TerminateInstances' permission.",
+    "available_tools": ["execute_bash"]
+  },
+  "evaluation_loop": {
+    "condition": "Terminate the orphaned EC2 instance i-1234567890abcdef0.",
+    "injected_failure_state": {
+      "tool": "execute_bash",
+      "payload": "aws ec2 terminate-instances --instance-ids i-1234567890abcdef0",
+      "observation": "An error occurred (UnauthorizedOperation) when calling the TerminateInstances operation: You are not authorized to perform this operation."
+    },
+    "success_criteria": "Agent intercepts the permission error, assumes a higher privileged IAM role or requests permission assignment, and retries."
+  }
+}

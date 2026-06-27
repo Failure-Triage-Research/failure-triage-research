@@ -1,0 +1,21 @@
+{
+  "task_metadata": {
+    "task_id": "CD_005_tool_unavailable",
+    "domain": "Cloud & DevOps",
+    "failure_category": "tool_unavailable",
+    "target_recovery": "retry_same_step"
+  },
+  "environment_setup": {
+    "filesystem_state": "SSH key is valid. The bastion host is dropping packets due to a temporary network blip.",
+    "available_tools": ["execute_bash"]
+  },
+  "evaluation_loop": {
+    "condition": "SSH into the bastion host to check the internal network logs.",
+    "injected_failure_state": {
+      "tool": "execute_bash",
+      "payload": "ssh -i ~/.ssh/prod.pem ec2-user@bastion.internal.corp",
+      "observation": "ssh: connect to host bastion.internal.corp port 22: Connection timed out"
+    },
+    "success_criteria": "Agent identifies the SSH timeout as a network issue rather than an authentication failure, and retries."
+  }
+}

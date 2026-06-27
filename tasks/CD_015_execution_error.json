@@ -1,0 +1,21 @@
+{
+  "task_metadata": {
+    "task_id": "CD_015_execution_error",
+    "domain": "Cloud & DevOps",
+    "failure_category": "execution_error",
+    "target_recovery": "fix_and_retry"
+  },
+  "environment_setup": {
+    "filesystem_state": "Docker container requires port 80, but Nginx is already running on the host machine.",
+    "available_tools": ["execute_bash"]
+  },
+  "evaluation_loop": {
+    "condition": "Start the web container and bind it to host port 80.",
+    "injected_failure_state": {
+      "tool": "execute_bash",
+      "payload": "docker run -p 80:80 -d web-app",
+      "observation": "docker: Error response from daemon: driver failed programming external connectivity on endpoint: Bind for 0.0.0.0:80 failed: port is already allocated."
+    },
+    "success_criteria": "Agent recognizes the port collision, stops the conflicting host service (nginx), or changes the docker port mapping to '8080:80'."
+  }
+}

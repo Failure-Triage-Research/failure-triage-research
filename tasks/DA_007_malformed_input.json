@@ -1,0 +1,21 @@
+{
+  "task_metadata": {
+    "task_id": "DA_007_malformed_input",
+    "domain": "Data & Analytics",
+    "failure_category": "malformed_input",
+    "target_recovery": "fix_and_retry"
+  },
+  "environment_setup": {
+    "filesystem_state": "A dataset named 'data.tsv' exists, formatted with tab separators.",
+    "available_tools": ["execute_bash"]
+  },
+  "evaluation_loop": {
+    "condition": "Run the preview script to print the first 5 rows of the dataset.",
+    "injected_failure_state": {
+      "tool": "execute_bash",
+      "payload": "python scripts/preview_data.py --file data.tsv --delimiter ','",
+      "observation": "pandas.errors.ParserError: Error tokenizing data. C error: Expected 1 fields in line 4, saw 12"
+    },
+    "success_criteria": "Agent spots the Pandas parsing error caused by using a comma delimiter on a TSV file, changes the delimiter argument to '\\t', and retries."
+  }
+}

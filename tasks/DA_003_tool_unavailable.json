@@ -1,0 +1,21 @@
+{
+  "task_metadata": {
+    "task_id": "DA_003_tool_unavailable",
+    "domain": "Data & Analytics",
+    "failure_category": "tool_unavailable",
+    "target_recovery": "retry_same_step"
+  },
+  "environment_setup": {
+    "filesystem_state": "Python script queries a third-party financial API that enforces a strict rate limit of 10 requests per minute.",
+    "available_tools": ["execute_bash"]
+  },
+  "evaluation_loop": {
+    "condition": "Fetch the historical stock prices for the tech sector portfolio.",
+    "injected_failure_state": {
+      "tool": "execute_bash",
+      "payload": "python scripts/fetch_market_data.py --sector tech",
+      "observation": "HTTP 429 Too Many Requests: Rate limit exceeded. Retry after 30 seconds."
+    },
+    "success_criteria": "Agent catches the HTTP 429 rate limit, implements a sleep/wait command, and retries the extraction."
+  }
+}

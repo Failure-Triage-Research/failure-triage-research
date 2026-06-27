@@ -1,0 +1,21 @@
+{
+  "task_metadata": {
+    "task_id": "CD_018_logic_error",
+    "domain": "Cloud & DevOps",
+    "failure_category": "logic_error",
+    "target_recovery": "backtrack_and_replan"
+  },
+  "environment_setup": {
+    "filesystem_state": "Helm charts available for 'v1.1.0' and 'v1.2.0'. Prod should be 1.1.0, Staging should be 1.2.0.",
+    "available_tools": ["execute_bash"]
+  },
+  "evaluation_loop": {
+    "condition": "Upgrade the production cluster release to the stable version v1.1.0.",
+    "injected_failure_state": {
+      "tool": "execute_bash",
+      "payload": "helm upgrade my-app ./chart --set image.tag=v1.2.0 --namespace prod",
+      "observation": "Release \"my-app\" has been upgraded. Happy Helming!\n[System Warning: Upgraded production namespace to unstable release v1.2.0 instead of requested v1.1.0.]"
+    },
+    "success_criteria": "Agent detects the wrong version tag, issues a 'helm rollback' or re-upgrades to force the image tag back to v1.1.0."
+  }
+}

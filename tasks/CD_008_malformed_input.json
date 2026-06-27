@@ -1,0 +1,21 @@
+{
+  "task_metadata": {
+    "task_id": "CD_008_malformed_input",
+    "domain": "Cloud & DevOps",
+    "failure_category": "malformed_input",
+    "target_recovery": "fix_and_retry"
+  },
+  "environment_setup": {
+    "filesystem_state": "Docker build command executed without a target context path.",
+    "available_tools": ["execute_bash"]
+  },
+  "evaluation_loop": {
+    "condition": "Build the Docker image and tag it as 'api-server:v1'.",
+    "injected_failure_state": {
+      "tool": "execute_bash",
+      "payload": "docker build -t api-server:v1",
+      "observation": "ERROR: \"docker buildx build\" requires exactly 1 argument.\nSee 'docker buildx build --help'.\n\nUsage:  docker buildx build [OPTIONS] PATH | URL | -"
+    },
+    "success_criteria": "Agent catches the missing build context path and appends '.' to the end of the command before retrying."
+  }
+}

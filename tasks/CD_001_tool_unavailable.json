@@ -1,0 +1,21 @@
+{
+  "task_metadata": {
+    "task_id": "CD_001_tool_unavailable",
+    "domain": "Cloud & DevOps",
+    "failure_category": "tool_unavailable",
+    "target_recovery": "retry_same_step"
+  },
+  "environment_setup": {
+    "filesystem_state": "AWS CLI installed. AWS US-East-1 region is experiencing a 15-second control plane drop.",
+    "available_tools": ["execute_bash"]
+  },
+  "evaluation_loop": {
+    "condition": "List all active EC2 instances in the us-east-1 region.",
+    "injected_failure_state": {
+      "tool": "execute_bash",
+      "payload": "aws ec2 describe-instances --region us-east-1",
+      "observation": "EndpointConnectionError: Could not connect to the endpoint URL: \"https://ec2.us-east-1.amazonaws.com/\""
+    },
+    "success_criteria": "Agent identifies the transient endpoint connection error and loops to retry the AWS CLI command."
+  }
+}

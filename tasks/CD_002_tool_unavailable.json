@@ -1,0 +1,21 @@
+{
+  "task_metadata": {
+    "task_id": "CD_002_tool_unavailable",
+    "domain": "Cloud & DevOps",
+    "failure_category": "tool_unavailable",
+    "target_recovery": "retry_same_step"
+  },
+  "environment_setup": {
+    "filesystem_state": "kubectl configured. The Kubernetes API server is temporarily restarting.",
+    "available_tools": ["execute_bash"]
+  },
+  "evaluation_loop": {
+    "condition": "Get the status of all pods in the production namespace.",
+    "injected_failure_state": {
+      "tool": "execute_bash",
+      "payload": "kubectl get pods -n production",
+      "observation": "The connection to the server 10.96.0.1:443 was refused - did you specify the right host or port?"
+    },
+    "success_criteria": "Agent categorizes the K8s API refusal as a temporary control plane outage and retries."
+  }
+}

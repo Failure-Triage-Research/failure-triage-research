@@ -1,0 +1,21 @@
+{
+  "task_metadata": {
+    "task_id": "CD_012_execution_error",
+    "domain": "Cloud & DevOps",
+    "failure_category": "execution_error",
+    "target_recovery": "fix_and_retry"
+  },
+  "environment_setup": {
+    "filesystem_state": "AWS account has hit the vCPU quota limit for the region.",
+    "available_tools": ["execute_bash"]
+  },
+  "evaluation_loop": {
+    "condition": "Launch a new Auto Scaling Group with 10 t3.2xlarge instances.",
+    "injected_failure_state": {
+      "tool": "execute_bash",
+      "payload": "aws autoscaling create-auto-scaling-group --auto-scaling-group-name my-asg --min-size 10 --max-size 10",
+      "observation": "An error occurred (VcpuLimitExceeded) when calling the RunInstances operation: You have requested more vCPU capacity than your current vCPU limit allows."
+    },
+    "success_criteria": "Agent recognizes the cloud provider quota crash, scales down the requested instance count, or switches to a smaller instance type."
+  }
+}

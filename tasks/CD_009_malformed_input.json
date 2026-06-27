@@ -1,0 +1,21 @@
+{
+  "task_metadata": {
+    "task_id": "CD_009_malformed_input",
+    "domain": "Cloud & DevOps",
+    "failure_category": "malformed_input",
+    "target_recovery": "fix_and_retry"
+  },
+  "environment_setup": {
+    "filesystem_state": "Terraform expects variables to be passed via -var flag.",
+    "available_tools": ["execute_bash"]
+  },
+  "evaluation_loop": {
+    "condition": "Plan the Terraform deployment for the 'staging' environment.",
+    "injected_failure_state": {
+      "tool": "execute_bash",
+      "payload": "terraform plan env=\"staging\"",
+      "observation": "Too many command line arguments. Configuration path expected."
+    },
+    "success_criteria": "Agent recognizes the malformed variable syntax, changes it to '-var=\"env=staging\"', and retries the plan."
+  }
+}

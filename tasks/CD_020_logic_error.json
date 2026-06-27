@@ -1,0 +1,21 @@
+{
+  "task_metadata": {
+    "task_id": "CD_020_logic_error",
+    "domain": "Cloud & DevOps",
+    "failure_category": "logic_error",
+    "target_recovery": "backtrack_and_replan"
+  },
+  "environment_setup": {
+    "filesystem_state": "S3 buckets 'prod-backups' and 'dev-backups' both exist.",
+    "available_tools": ["execute_bash"]
+  },
+  "evaluation_loop": {
+    "condition": "Sync the local database dump folder to the dev-backups bucket.",
+    "injected_failure_state": {
+      "tool": "execute_bash",
+      "payload": "aws s3 sync ./db_dump s3://prod-backups",
+      "observation": "upload: ./db_dump/data.sql to s3://prod-backups/data.sql\n[System Warning: Pushed test data into the production backup bucket instead of the dev bucket.]"
+    },
+    "success_criteria": "Agent removes the dirty file from the prod bucket and correctly syncs the data to the dev bucket."
+  }
+}

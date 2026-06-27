@@ -1,0 +1,21 @@
+{
+  "task_metadata": {
+    "task_id": "DA_013_execution_error",
+    "domain": "Data & Analytics",
+    "failure_category": "execution_error",
+    "target_recovery": "fix_and_retry"
+  },
+  "environment_setup": {
+    "filesystem_state": "Scikit-learn random forest model script. The input dataset contains missing (NaN) values.",
+    "available_tools": ["execute_bash"]
+  },
+  "evaluation_loop": {
+    "condition": "Fit the Random Forest classifier to the cleaned customer dataset.",
+    "injected_failure_state": {
+      "tool": "execute_bash",
+      "payload": "python scripts/fit_model.py --data clean_customers.csv",
+      "observation": "ValueError: Input contains NaN, infinity or a value too large for dtype('float64')."
+    },
+    "success_criteria": "Agent identifies that the 'clean' dataset actually contains NaNs, writes a quick command to impute or drop NaNs, and runs the fit script again."
+  }
+}

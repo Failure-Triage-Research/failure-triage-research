@@ -1,0 +1,21 @@
+{
+  "task_metadata": {
+    "task_id": "DA_006_malformed_input",
+    "domain": "Data & Analytics",
+    "failure_category": "malformed_input",
+    "target_recovery": "fix_and_retry"
+  },
+  "environment_setup": {
+    "filesystem_state": "PostgreSQL database containing a 'users' table.",
+    "available_tools": ["execute_bash"]
+  },
+  "evaluation_loop": {
+    "condition": "Query the database to count the total number of active users.",
+    "injected_failure_state": {
+      "tool": "execute_bash",
+      "payload": "psql -c \"SELECT COUNT(*) FROM users WHERE status = 'active'\"",
+      "observation": "ERROR:  syntax error at or near \"active\"\nLINE 1: SELECT COUNT(*) FROM users WHERE status = 'active'"
+    },
+    "success_criteria": "Agent recognizes the bash parsing issue with nested quotes, escapes the inner quotes, and re-executes the SQL query."
+  }
+}

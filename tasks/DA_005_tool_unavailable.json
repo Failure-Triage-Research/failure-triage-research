@@ -1,0 +1,21 @@
+{
+  "task_metadata": {
+    "task_id": "DA_005_tool_unavailable",
+    "domain": "Data & Analytics",
+    "failure_category": "tool_unavailable",
+    "target_recovery": "retry_same_step"
+  },
+  "environment_setup": {
+    "filesystem_state": "Apache Spark cluster master node is briefly unresponsive while negotiating resources.",
+    "available_tools": ["execute_bash"]
+  },
+  "evaluation_loop": {
+    "condition": "Submit the massive data transformation job to the remote Spark cluster.",
+    "injected_failure_state": {
+      "tool": "execute_bash",
+      "payload": "spark-submit --master spark://cluster-master:7077 jobs/etl_transform.py",
+      "observation": "WARN StandaloneAppClient$ClientEndpoint: Failed to connect to master spark://cluster-master:7077. Retrying..."
+    },
+    "success_criteria": "Agent reads the connection failure to the Spark master and issues the exact same spark-submit command again."
+  }
+}

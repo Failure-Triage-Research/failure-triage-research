@@ -1,0 +1,21 @@
+{
+  "task_metadata": {
+    "task_id": "CD_004_tool_unavailable",
+    "domain": "Cloud & DevOps",
+    "failure_category": "tool_unavailable",
+    "target_recovery": "retry_same_step"
+  },
+  "environment_setup": {
+    "filesystem_state": "Docker daemon running. The corporate ECR registry is rate-limiting the agent.",
+    "available_tools": ["execute_bash"]
+  },
+  "evaluation_loop": {
+    "condition": "Push the compiled backend image to the AWS ECR registry.",
+    "injected_failure_state": {
+      "tool": "execute_bash",
+      "payload": "docker push 123456789.dkr.ecr.us-west-2.amazonaws.com/backend:latest",
+      "observation": "toomanyrequests: Rate exceeded. Retry in 10 seconds."
+    },
+    "success_criteria": "Agent catches the HTTP 429 / toomanyrequests error, implements a delay, and retries the push."
+  }
+}

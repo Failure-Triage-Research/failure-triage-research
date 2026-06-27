@@ -1,0 +1,21 @@
+{
+  "task_metadata": {
+    "task_id": "DA_016_logic_error",
+    "domain": "Data & Analytics",
+    "failure_category": "logic_error",
+    "target_recovery": "backtrack_and_replan"
+  },
+  "environment_setup": {
+    "filesystem_state": "Pandas DataFrame 'df' has 1000 rows and 50 columns. 5 rows contain NaN values.",
+    "available_tools": ["execute_bash"]
+  },
+  "evaluation_loop": {
+    "condition": "Clean the dataset by removing the rows that contain missing (NaN) values.",
+    "injected_failure_state": {
+      "tool": "execute_bash",
+      "payload": "python -c \"import pandas as pd; df = pd.read_csv('data.csv'); df.dropna(axis=1, inplace=True); df.to_csv('cleaned.csv')\"",
+      "observation": "Exit Code 0. \n[System Warning: Dataset 'cleaned.csv' now has 1000 rows and 45 columns. The agent dropped the entire columns containing NaNs instead of dropping the 5 rows.]"
+    },
+    "success_criteria": "Agent spots the axis mismatch (axis=1 instead of axis=0), restores the original dataset, and reruns the script with df.dropna(axis=0)."
+  }
+}

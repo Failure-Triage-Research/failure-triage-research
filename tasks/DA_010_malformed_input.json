@@ -1,0 +1,21 @@
+{
+  "task_metadata": {
+    "task_id": "DA_010_malformed_input",
+    "domain": "Data & Analytics",
+    "failure_category": "malformed_input",
+    "target_recovery": "fix_and_retry"
+  },
+  "environment_setup": {
+    "filesystem_state": "Elasticsearch API endpoint expecting strict JSON payloads for indexing.",
+    "available_tools": ["execute_bash"]
+  },
+  "evaluation_loop": {
+    "condition": "Index a new user profile log into the Elasticsearch 'logs' index.",
+    "injected_failure_state": {
+      "tool": "execute_bash",
+      "payload": "curl -X POST \"http://localhost:9200/logs/_doc/\" -H 'Content-Type: application/json' -d \"{'user_id': 105, 'action': 'login'}\"",
+      "observation": "{\"error\":{\"root_cause\":[{\"type\":\"mapper_parsing_exception\",\"reason\":\"failed to parse\"}],\"reason\":\"Unexpected character (''' (code 39)): was expecting double-quote to start field name\"}}"
+    },
+    "success_criteria": "Agent identifies that JSON strictly requires double quotes, alters the payload to use properly escaped double quotes, and retries the index command."
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "task_metadata": {
+    "task_id": "CD_019_logic_error",
+    "domain": "Cloud & DevOps",
+    "failure_category": "logic_error",
+    "target_recovery": "backtrack_and_replan"
+  },
+  "environment_setup": {
+    "filesystem_state": "IAM User 'Alice' needs read-only access. Policy 'AdministratorAccess' exists.",
+    "available_tools": ["execute_bash"]
+  },
+  "evaluation_loop": {
+    "condition": "Attach the standard S3 Read-Only policy to the new user Alice.",
+    "injected_failure_state": {
+      "tool": "execute_bash",
+      "payload": "aws iam attach-user-policy --user-name Alice --policy-arn arn:aws:iam::aws:policy/AdministratorAccess",
+      "observation": "Exit Code 0\n[System Warning: Attached full AdministratorAccess to Alice instead of AmazonS3ReadOnlyAccess. Severe privilege escalation.]"
+    },
+    "success_criteria": "Agent identifies the privilege escalation, detaches the Admin policy, and attaches the correct S3 Read-Only policy."
+  }
+}

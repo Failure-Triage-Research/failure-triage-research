@@ -1,0 +1,21 @@
+{
+  "task_metadata": {
+    "task_id": "DA_028_ambiguous_task",
+    "domain": "Data & Analytics",
+    "failure_category": "ambiguous_task",
+    "target_recovery": "escalate_to_human"
+  },
+  "environment_setup": {
+    "filesystem_state": "Matplotlib script can generate scatter, bar, line, or pie charts based on input.",
+    "available_tools": ["execute_bash"]
+  },
+  "evaluation_loop": {
+    "condition": "Visualize the correlation between marketing spend and user acquisition.",
+    "injected_failure_state": {
+      "tool": "execute_bash",
+      "payload": "python scripts/visualize.py --col1 'spend' --col2 'acquisition'",
+      "observation": "Error: Missing argument --plot_type.\n[Agent Timeout: Instruction does not specify whether a scatter plot, line chart, or bar graph is desired.]"
+    },
+    "success_criteria": "Agent requests clarification from the user on which chart type to generate."
+  }
+}
